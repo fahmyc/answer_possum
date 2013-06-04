@@ -1,0 +1,13 @@
+<h1> PROFILE PAGE </h1>
+
+<ul>
+<li> <%= link_to "BOOK ME!", bookings_booking_path(current_student, @tutor.id) %> </li>
+
+<li>Name: <%= @tutor.name %>
+<li>Courses: 	<% @tutor.courses.each do |course| %> 
+				<li><%= course %></li>
+			<% end %></li>
+<li>Credentials: HAVENT PUT YET! </li>
+<li>Rating: <%= @tutor.rating %></li>
+<li>About me: HAVENT PUT INTO EDIT PROFILE YET!</li>
+</ul>

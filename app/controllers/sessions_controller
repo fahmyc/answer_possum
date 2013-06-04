@@ -1,0 +1,17 @@
+class SessionsController < Devise::SessionsController
+
+
+#def new
+#	after_update_path_for(current_student)
+#end
+#
+#def edit
+#	after_update_path_for(current_student)
+#end
+
+#  protected
+
+ #   def after_update_path_for(resource)
+      student_path(resource)
+  #  end
+end

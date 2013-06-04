@@ -1,0 +1,7 @@
+<%= form_for(@question) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+    <%= f.text_area :content, placeholder: "Ask a new Question..." %>
+
+  <%= f.submit "Ask Question" %>
+<% end %>

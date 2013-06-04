@@ -1,0 +1,15 @@
+<h2>Resend confirmation instructions</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.full_error :confirmation_token %>
+
+ <div class="row">
+  <div class="span6 offset1">
+    <%= f.input :email, :required => true, :autofocus => true %>
+    <%= f.button :submit, "Resend confirmation instructions", class: "btn btn-large btn-primary" %>
+  </div>
+</div>
+<% end %>
+
+<%= render "students/shared/links" %>

@@ -1,4 +1,43 @@
 AnswerPossum::Application.routes.draw do
+
+  devise_for :admins
+
+  devise_for  :tutors
+
+  devise_for  :students
+
+
+ 
+  #do
+   # get 'inbox', :on => :member
+  #end
+
+  resources   :students, :only => [:show]
+  resources   :admins
+  resources   :tutors
+  resources   :questions, :only => [:create, :destroy, :show]
+  resources   :answers 
+  resources   :ratings
+  resources   :bookings
+
+  #, :controllers => { :sessions => "students/sessions" }
+
+  root to: 'static_pages#home'
+
+  match '/faq',               to: 'static_pages#faq'
+  match '/signup',            to: 'static_pages#signup'
+  match '/contact',           to: 'static_pages#contact'
+  match '/bad',               to: 'static_pages#bad'
+  match 'students/:id',       to: 'students#show'
+  match 'tutors/:id',         to: 'tutors#show'
+  match 'admins/:id',        to: 'admins#show', :as => "admin_show"
+  match 'questions/:courses', to: 'questions#show', :as => "questions_courses", :via => "get"
+  match 'students/:id/inbox', to: 'students#inbox', :as => "students_inbox",    :via => "get" #
+  match 'questions/qna/:id/:student_id', to: 'questions#qna', :as => "questions_qna",    :via => "get"
+  match 'bookings/:student_id/:tutor_id', to:'bookings#booking', :as =>"bookings_booking", :via => "get"
+  match 'tutors/profile/:tutor_id',    to: 'tutors#tutor_profile',  :as => "tutors_profile", :via => "get"
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

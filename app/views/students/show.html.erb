@@ -1,0 +1,25 @@
+<h1> <%= @students.name %>'s Work Desk </h1>
+  <body>
+
+  	My email: <%= @students.email %>
+
+  <p>
+    Courses I'm taking:
+    <% @students.courses.each do |course| %>
+      <li> <%= course %> </li>
+    <% end %>
+  </p>
+
+	<%= render 'shared/question_form' %>
+
+ 	<% if @students.questions.any? %>
+      <h3>Questions (<%= @students.questions.count %>)</h3>
+      <ol>
+        <%= render @questions %>
+      </ol>
+      <%= will_paginate @questions %>
+    <% else %>
+    	<p> NO QUESTIONS YET </p>
+    <% end %>
+
+  </body>

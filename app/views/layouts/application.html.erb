@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AnswerPossum</title>
+  <title>Answer Possum</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery.ui.core.min" %>  
+  <%= javascript_include_tag "jquery.ui.widget.min" %>  
+  <%= javascript_include_tag "jquery.effects.core" %>  
+
+  <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+	<%= render 'layouts/header' %>
+
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
 
 <%= yield %>
 
+	<%= render 'layouts/footer' %>
+  <%= debug(params) if Rails.env.development? %>
+</div>
 </body>
 </html>

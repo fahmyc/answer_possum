@@ -1,0 +1,11 @@
+<%= simple_form_for(@answer) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+ <div class="row">
+  <div class="span6 offset1">
+	<%= f.input :content, as: :text %>
+	<%= f.input :question_id, as: :hidden, :input_html => { :value => question.id } %>
+	<%= f.button :submit, label: "Answer Question", class: "btn btn-large btn-primary" %>
+</div>
+</div>
+	
+<% end %>

@@ -1,0 +1,13 @@
+DONT USE THIS
+
+<li>
+  <%= link_to tutor.name, '#' %> 
+  		| Can tutor: 	<% tutor.courses.each do |course| %>
+  						<%= course %>
+  						<% end %>
+  <% if tutor.rating == nil %>
+  		|(No ratings yet)
+  <% else %>
+  		| Rating: <%= tutor.rating %>
+  <% end %>
+</li>

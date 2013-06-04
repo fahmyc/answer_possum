@@ -1,0 +1,23 @@
+<h1> <%= @students.name %>'s INBOX </h1>
+
+<table id = "inbox_question_list", class="display">
+	<thead>
+		<tr>
+			<th>Subject</th>
+			<th>Course</th>
+			<th>Date asked</th>
+			<th>Number of Answers</th>
+		</tr>
+	</thead>
+
+<tbody>
+<% @questions.each do |question| %>
+	<tr>
+		<td><%= link_to question.subject, questions_qna_path(question.id, current_student) %> </td>
+		<td><%= question.courses %> </td>
+		<td><%= question.created_at %> </td>
+		<td><%= Answer.find(:all, :conditions => ['question_id = ?', question]).count %> </td>
+	</tr>
+<% end %>
+</tbody>
+</table>

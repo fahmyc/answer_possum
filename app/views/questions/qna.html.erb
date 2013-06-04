@@ -1,0 +1,40 @@
+<h1><%= @question.subject %></h1>
+
+<h2> Your Question:</h2>
+<p> <%= @question.content %> </p>
+
+
+<% if @answers_to_question.any? %>
+
+<% for answer in @answers_to_question %>
+
+<% tutorid = answer.tutor_id %>
+<% tutor = Tutor.find_by_id(tutorid) %>
+
+	<div class = "accordion_menu">
+		<h3><%= tutor.name %> answered question on <%= answer.created_at %> </h3>
+		<div>
+			<p><%= answer.content %></p>
+			<p>
+				<% if answer.rating == nil %>
+					<%= simple_form_for(answer) do |f| %>
+					<%#= simple_form_for(@rating) do |f| %>
+	  				<%= render 'shared/error_messages', object: f.object %>
+						<%= f.input :rating, collection: @ratings, as: :radio %>
+						<%= f.input :student_id, as: :hidden, :input_html => { :value => params[:student_id] } %>
+						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid } %>
+						<%= f.button :submit, label: "RATE ANSWER" %>
+					<% end %>
+				<% else %>
+					<p> Thanks for rating this answer! </p>
+				<% end %>
+
+
+			</p>
+		</div>
+	</div>
+<% end %>
+
+<% else %>
+<p> No one has answered your question yet. </p>
+<% end %>

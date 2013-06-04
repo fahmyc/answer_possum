@@ -1,0 +1,11 @@
+<h1> <%= @tutors.name %>'s Office YEEEEE BOY</h1>
+<% if @tutors.rating == nil %>
+	<h3> No one has rated any of your answers yet </h3>
+<% else %>
+	<h2>Rating: <%= @tutors.rating %></h2>
+<% end %>
+
+    See Questions for:
+    <% current_tutor.courses.each do |course| %>
+      <li> <%= link_to course, questions_courses_path(course) %> </li>
+    <% end %>

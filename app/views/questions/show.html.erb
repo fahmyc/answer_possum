@@ -1,0 +1,22 @@
+<h1> Question Dashboard </h1>
+
+
+
+
+<% for question in @questions %>
+	<div class = "accordion_menu">
+		<h3><%= question.subject %></h3>
+		<div>
+			<p><%= question.content %></p>
+			<p><%= simple_form_for(@answer) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+	<%= f.input :content, as: :text %>
+	<%= f.input :question_id, as: :hidden, :input_html => { :value => question.id } %>
+	<%= f.button :submit, label: "Answer Question" %>
+
+	
+<% end %></p>
+		</div>
+	</div>
+<% end %>

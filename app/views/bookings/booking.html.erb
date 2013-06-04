@@ -1,0 +1,14 @@
+<h1> BOOKING!!! </h1>
+
+<h2>Tutor: <%= @tutor.name.capitalize %></h2>
+<h2>Best time to tutor: HAVEN'T DONE THIS YET! </h2>
+
+<%= simple_form_for(@booking) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+	<%= f.input :content, as: :text, placeholder: "Type body of the email." %>
+	<%= f.input :student_id, as: :hidden, :input_html => { :value => @student.id } %>
+	<%= f.input :tutor_id, as: :hidden, :input_html => { :value => @tutor.id } %>
+	<%= f.input :email_confirmation, inline_label: 'Send me a request confirmation email' %>
+	<%= f.button :submit, label: "Send booking request" %>
+<% end %>

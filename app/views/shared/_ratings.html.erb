@@ -1,0 +1,9 @@
+<%= simple_form_for(@rating) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+ <div class="row">
+  <div class="span6 offset1">
+	<%= f.input :ratings, collection: @ratings, as: :radio %>
+	<%= f.button :submit, label: "RATE ANSWER", class: "btn btn-large btn-primary" %>
+</div>
+</div>
+<% end %>

@@ -1,0 +1,36 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <nav>
+        <ul class="nav pull-left">
+          <% if !student_signed_in? & !tutor_signed_in? %>
+            <li><%= link_to "Home", 		root_path %></li>
+            <% end %>
+            <li><%= link_to "FAQ", 		faq_path %></li>
+            <li><%= link_to "Contact", 	contact_path %></li>
+        </ul>
+        <ul class="nav pull-right">
+          <% if student_signed_in? %>
+            <li><%= link_to 'Student Home', student_path(current_student) %></li>
+            <li><%= link_to 'Your Inbox', students_inbox_path(current_student) %></li>
+            <li><%= link_to 'Tutor List', tutors_path %></li>
+            <li><%= link_to 'Edit Profile', edit_student_registration_path %></li>
+            <li><%= link_to 'Sign Out',	destroy_student_session_path, :method => :delete %></li>
+
+          <% elsif tutor_signed_in?%>
+            <li><%= link_to 'Tutor Home', tutor_path(current_tutor) %></li>
+            <li><%= link_to 'Edit Profile', edit_tutor_registration_path %></li>
+            <li><%= link_to 'Sign Out', destroy_tutor_session_path, :method => :delete %></li>
+
+          <% elsif admin_signed_in? %>
+            <li><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></li>
+          <% else %>
+            <li><%= link_to "Student Sign In",			new_student_session_path %></li>
+            <li><%= link_to "Tutor Sign In",      new_tutor_session_path %></li>
+            <li><%= link_to "Student Sign Up",	new_student_registration_path %></li>
+            <li><%= link_to "Tutor Sign Up",		new_tutor_registration_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>

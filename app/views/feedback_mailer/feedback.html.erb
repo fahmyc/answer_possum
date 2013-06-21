@@ -1,0 +1,11 @@
+<p>Dear Answer Possum,</p>
+
+<p>You're lucky today, you've got feedback from your users:</p>
+
+<p>Subject: <%=h @feedback.subject %></p>
+<p>User's email: <%=h @feedback.email %></p>
+<p>Sent at: <%= Time.now %></p>
+<p>From Page: <%= @feedback.page %></p>
+<br></br>
+<p>Comment: </p>
+<p><%=h @feedback.comment %></p>

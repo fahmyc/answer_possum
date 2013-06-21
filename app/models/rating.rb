@@ -1,5 +1,5 @@
 class Rating < ActiveRecord::Base
-  attr_accessible :answer_id, :rating, :tutor_id
+  attr_accessible :answer_id, :rating, :tutor_id, :positive_rating
 
   belongs_to :answer
   belongs_to :student

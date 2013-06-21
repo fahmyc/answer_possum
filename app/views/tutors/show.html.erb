@@ -1,4 +1,5 @@
-<h1> <%= @tutors.name %>'s Office YEEEEE BOY</h1>
+<div class = "tutor_home">
+<h1> <%= @tutors.name %>'s Office</h1>
 <% if @tutors.rating == nil %>
 	<h3> No one has rated any of your answers yet </h3>
 <% else %>
@@ -9,3 +10,4 @@
     <% current_tutor.courses.each do |course| %>
       <li> <%= link_to course, questions_courses_path(course) %> </li>
     <% end %>
+</div>

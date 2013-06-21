@@ -1,21 +1,40 @@
 <div class="home">
-<div class="container">
 
-	<div class="hero-unit">  
-		<h1>Welcome to Answer Possum!</h1>
-	</div>
-
+<% if !student_signed_in? && !tutor_signed_in? %>
 	<div class = "row">
-		<div class="span6">
-			<h2>Student Login</h2>
-			<p>The student login form will go here.</p>
-			<p>New student? LOGIN HERE!</p>
-		</div>
-		<div class="span 6">
-			<h2>Tutor Login</h2>
-			<p>The tutor login form will go here.</p>
-			<p>New tutor? LOGIN HERE!</p>
+		<div class = "span12" style="height:300px">
 		</div>
 	</div>
+		<div class = "row">
+			<div class="span3"><br></br></div>
+
+			<%= link_to new_student_registration_path do %>
+			<div class="span5" style="height:100px">
+				<button class="btn btn-large btn-block btn-success" type="button" style="height:100px">
+					<h2> Student Sign Up Here!</h2>
+					<p> Ask questions to tutors! </p>
+				</button>
+			</div>
+			<% end %>
+
+			<%= link_to new_tutor_registration_path do %>
+			<div class="span5" style="height:100px">
+				<button class="btn btn-large btn-block btn-success" type="button" style="height:100px">
+					<h2> Tutors Sign Up Here!</h2>
+					<p> Answer questions and build your client base! </p>
+				</button>
+			</div>
+			<% end %>
+		</div>
+	</div>
+
+
+<% elsif student_signed_in? %>
+<div class = "signed_in_home">
+	<h1> Go back to your <%=link_to "Work Desk", student_path(current_student) %> </h1>
 </div>
+<% elsif tutor_signed_in? %>
+<div class = "signed_in_home">
+	<h1> Go back to your <%=link_to "Work Desk", tutor_path(current_tutor) %> </h1>
 </div>
+<% end %>

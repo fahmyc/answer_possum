@@ -15,6 +15,7 @@ class Tutor < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :bookings
+  has_many :comments
 
 #  def self.tutor_rating(tutor_id)
  #   tutor = Tutor.find_by_id(tutor_id)
@@ -22,9 +23,13 @@ class Tutor < ActiveRecord::Base
    # new_rate = tutor.rating.build(:rating)
   #end
 
-  before_save :default_rating
+  before_save :default_rating, :clear_empty_courses
 
   def default_rating
     self.rating ||= 0
+  end
+
+  def clear_empty_courses
+    self.courses.reject!{|x| x==''}
   end
 end

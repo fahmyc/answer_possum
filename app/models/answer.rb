@@ -8,4 +8,5 @@ class Answer < ActiveRecord::Base
   #validates :question_id, presence: true
   validates :content, presence: true
 
+  has_many :comments
 end

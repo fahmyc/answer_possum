@@ -4,19 +4,30 @@
 
 
 <% for question in @questions %>
+<% answer_count = Answer.find(:all, :conditions =>['question_id=?', question.id]) %>
 	<div class = "accordion_menu">
-		<h3><%= question.subject %></h3>
+		<h3><%= question.subject %> (Answered <%= pluralize(answer_count.count, "time") %>) </h3>
 		<div>
 			<p><%= question.content %></p>
+			<% duplicate_answer = Answer.find(:all, :conditions => {question_id: question.id, tutor_id: current_tutor.id}) %>
+			<% dup = duplicate_answer.collect(&:content) %>
+			<% if duplicate_answer.empty? %>
+
 			<p><%= simple_form_for(@answer) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+				  <%= render 'shared/error_messages', object: f.object %>
 
-	<%= f.input :content, as: :text %>
-	<%= f.input :question_id, as: :hidden, :input_html => { :value => question.id } %>
-	<%= f.button :submit, label: "Answer Question" %>
+					<%= f.input :content, as: :text, input_html: {style: 'height:100px; width:500px;'} %>
+					<%= f.input :question_id, as: :hidden, :input_html => { :value => question.id } %>
+					<%= f.button :submit, label: "Answer Question" %>
 
-	
-<% end %></p>
+					
+				<% end %>
+			</p>
+			<% else %>
+				<p>
+					<strong>Your answer: <% dup.each do |dup| %> <%= dup %> <% end %></strong>
+				</p>
+			<% end %>
 		</div>
 	</div>
 <% end %>

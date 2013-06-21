@@ -11,7 +11,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-gem 'activerecord-reputation-system', require: 'reputation_system'
+gem 'crypt-rot13'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

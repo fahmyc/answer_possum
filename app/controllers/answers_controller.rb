@@ -1,12 +1,12 @@
 class AnswersController < ApplicationController
   before_filter :tutor_signed_in?
-  
+  before_filter :correct_tutor, only: :answer_page
 
   def create
     @answer = current_tutor.answers.build(params[:answer])
     if @answer.save
       flash[:success] = "Answer sent!"
-      redirect_to tutor_path(current_tutor)
+      redirect_to :back
     else
       render 'static_pages/bad'
     end
@@ -27,26 +27,49 @@ class AnswersController < ApplicationController
     new_rating = r.to_f + current_rating
     tutor.update_attributes(rating: new_rating)
 
+    #zero = 0
+     # if r > zero
+      #  @answer.update_attributes(positive_rating: 1)
+      #end
 
-      
-      flash[:success] = "Thanks for rating this answer! rating: #{r} tutor id: #{t}"
+      flash[:success] = "Thanks for rating this answer!"
       redirect_to students_inbox_path(current_student)
     else
       render 'static_pages/bad'
     end
   end
 
-#  def rating
- #   value = params[:type] = "up" ? 1 : -1
-  #  @answer = Answer.find(:all, :conditions => ['question_id = ?', params[:id]] )
+  def answer_page
+    question_from_course = Question.find(:all, :conditions => ['courses =?', params[:courses]])
+    questions = question_from_course.collect(&:id)
+    @answers = Answer.find(:all, :conditions =>{:tutor_id => params[:tutor_id], :question_id => questions})
+    
+    correct_question_id = @answers.collect(&:question_id)
+    @questions = Question.find(:all, :conditions =>{:id => correct_question_id})
+  end
 
-   #   for answer in @answer
-    #    answer.add_evaluation(:rating, value, current_student)
-     # end
-    #redirect_to :back, notice: "Thank you for rating this answer"   
+  def specific_answer_page
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:id])
+    @tutor = Tutor.find(params[:tutor_id])
+    @comments = Comment.find(:all, :conditions => ['answer_id =?', params[:id]])
+    @student = Student.find(@question.student_id)
 
-   #@answer.add_evaluation(:rating, value, current_student) 
-    #redirect_to :back, notice: "Thank you for rating this answer" 
-  #end
+
+    #@comment = current_tutor.comments.build if tutor_signed_in?
+    @comment = current_tutor.comments.build if tutor_signed_in?
+
+  end
+  
+private
+
+    def correct_tutor
+      @tutor = Tutor.find(params[:tutor_id])
+      redirect_to(tutor_path(current_tutor)) unless current_tutor?(@tutor)
+    end
+    def correct_student
+      @student = Student.find(params[:id])
+      redirect_to(student_path(current_student)) unless current_student?(@student)
+    end
 
 end

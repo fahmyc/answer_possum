@@ -10,11 +10,14 @@
 
 <% tutorid = answer.tutor_id %>
 <% tutor = Tutor.find_by_id(tutorid) %>
+<% answerid = answer.id %>
 
 	<div class = "accordion_menu">
+		
 		<h3><%= tutor.name %> answered question on <%= answer.created_at %> </h3>
 		<div>
 			<p><%= answer.content %></p>
+
 			<p>
 				<% if answer.rating == nil %>
 					<%= simple_form_for(answer) do |f| %>
@@ -23,12 +26,47 @@
 						<%= f.input :rating, collection: @ratings, as: :radio %>
 						<%= f.input :student_id, as: :hidden, :input_html => { :value => params[:student_id] } %>
 						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid } %>
+						<%= f.input :answer_id, as: :hidden, :input_html => { :value => answerid } %>
 						<%= f.button :submit, label: "RATE ANSWER" %>
 					<% end %>
+
 				<% else %>
 					<p> Thanks for rating this answer! </p>
 				<% end %>
+			
+			<%= link_to "Book #{tutor.name} now!", bookings_booking_path(current_student, tutorid) %>		
 
+				<p>
+					<% comments = Comment.find(:all, :conditions => ['answer_id =?', answerid]) %>
+
+					<% for c in comments %>
+						<% if c.student_sent? %>
+							<p>
+								<br><strong>You: </strong><%= c.content %></br>
+								<br><strong>Posted at:</strong> <%= c.created_at %></br>
+							</p>
+						<% else %>
+							<p>
+								<br><strong><%= link_to "#{tutor.name}", bookings_booking_path(current_student, tutorid) %>:</strong> <%= c.content %></br>
+								<br><strong>Posted at: </strong><%= c.created_at %></br>
+							</p>
+						<% end %>
+					<% end %>
+				
+				</p>
+
+
+			<p> 
+					<%# @comment = current_student.comments.build if student_signed_in? %>
+					<%= simple_form_for(@comment) do |f| %>
+						<%= f.text_area :content, placeholder: "Follow up question or comment?" %>
+						<%= f.input :answer_id, as: :hidden, :input_html => { :value => answerid} %>
+						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid} %>
+						<%= f.input :student_sent, as: :hidden, :input_html => { :value => 1} %>
+						<%= f.button :submit, label: "Send comment" %>
+					<% end %>	
+				</p>
+				
 
 			</p>
 		</div>
@@ -38,3 +76,4 @@
 <% else %>
 <p> No one has answered your question yet. </p>
 <% end %>
+

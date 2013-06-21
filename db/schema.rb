@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603150524) do
+ActiveRecord::Schema.define(:version => 20130619151455) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130603150524) do
     t.datetime "updated_at",  :null => false
     t.integer  "rating"
     t.integer  "student_id"
+    t.integer  "foq_helper"
   end
 
   create_table "bookings", :force => true do |t|
@@ -48,6 +49,27 @@ ActiveRecord::Schema.define(:version => 20130603150524) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.boolean  "email_confirmation"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "answer_id"
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.text     "content"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.boolean  "student_sent"
+  end
+
+  add_index "comments", ["student_id", "tutor_id", "answer_id"], :name => "index_comments_on_student_id_and_tutor_id_and_answer_id"
+
+  create_table "feedbacks", :force => true do |t|
+    t.string   "subject"
+    t.text     "content"
+    t.integer  "student_id"
+    t.integer  "tutor_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "questions", :force => true do |t|
@@ -62,10 +84,11 @@ ActiveRecord::Schema.define(:version => 20130603150524) do
   create_table "ratings", :force => true do |t|
     t.integer  "answer_id"
     t.integer  "rating"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "student_id"
     t.integer  "tutor_id"
+    t.boolean  "positive_rating"
   end
 
   add_index "ratings", ["answer_id", "rating"], :name => "index_ratings_on_answer_id_and_rating"

@@ -1,4 +1,4 @@
-
+@import "bootstrap";
 
 html {
     overflow: scroll;
@@ -6,8 +6,36 @@ html {
 }
 
 body {  
-padding-top: 60px;  
-padding-bottom: 40px;  
+padding-top: 40px;  
+padding-bottom: 40px; 
+ 
+}
+
+.signed_in_home{
+  height: 350px;
+  color: white;
+}
+
+.tutor_home{
+  padding-top: 100px;
+}
+
+.footer{
+	background:white;
+	width: 100%;
+}
+
+.home {
+	 padding-top: -60px;  
+padding-bottom: -40px; 
+
+	 margin: 0;
+     background: url('main possum.jpg');
+     background-size: 100% 100%;
+     background-repeat:no-repeat;
+    display: compact;
+     font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }  
 
 .nav li {  
@@ -19,6 +47,15 @@ padding-top: 5px;
 padding-bottom: 40px; 
 }
 
-.home{
-background-image: image-url("main possum.jpg");
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+input[type=text_area]
+{
+height: 25px;
 }

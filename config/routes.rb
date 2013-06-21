@@ -1,5 +1,9 @@
 AnswerPossum::Application.routes.draw do
 
+  match 'feedbacks' => 'feedbacks#create', :as => :feedback
+
+  match 'feedbacks/new' => 'feedbacks#new', :as => :new_feedback
+
   devise_for :admins
 
   devise_for  :tutors
@@ -19,6 +23,8 @@ AnswerPossum::Application.routes.draw do
   resources   :answers 
   resources   :ratings
   resources   :bookings
+  resources   :comments
+  resources   :feedback
 
   #, :controllers => { :sessions => "students/sessions" }
 
@@ -28,6 +34,7 @@ AnswerPossum::Application.routes.draw do
   match '/signup',            to: 'static_pages#signup'
   match '/contact',           to: 'static_pages#contact'
   match '/bad',               to: 'static_pages#bad'
+  match '/user-feedback',          to: 'feedbacks#feedback_home',  :as => "feedback_home"
   match 'students/:id',       to: 'students#show'
   match 'tutors/:id',         to: 'tutors#show'
   match 'admins/:id',        to: 'admins#show', :as => "admin_show"
@@ -36,7 +43,8 @@ AnswerPossum::Application.routes.draw do
   match 'questions/qna/:id/:student_id', to: 'questions#qna', :as => "questions_qna",    :via => "get"
   match 'bookings/:student_id/:tutor_id', to:'bookings#booking', :as =>"bookings_booking", :via => "get"
   match 'tutors/profile/:tutor_id',    to: 'tutors#tutor_profile',  :as => "tutors_profile", :via => "get"
-
+  match 'answers/:courses/:tutor_id',   to: 'answers#answer_page',    :as => "tutors_answers", :via =>"get"
+  match 'answers/:id/:tutor_id/:question_id',     to: 'answers#specific_answer_page', :as => "specific_answer"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

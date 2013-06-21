@@ -1,4 +1,4 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
       <nav>
@@ -8,29 +8,40 @@
             <% end %>
             <li><%= link_to "FAQ", 		faq_path %></li>
             <li><%= link_to "Contact", 	contact_path %></li>
+            <li><%= feedback_tab(:position => 'right') %></li>
+
         </ul>
         <ul class="nav pull-right">
           <% if student_signed_in? %>
             <li><%= link_to 'Student Home', student_path(current_student) %></li>
             <li><%= link_to 'Your Inbox', students_inbox_path(current_student) %></li>
-            <li><%= link_to 'Tutor List', tutors_path %></li>
+            <li><%= link_to 'Tutor List (book tutors here!)', tutors_path %></li>
             <li><%= link_to 'Edit Profile', edit_student_registration_path %></li>
             <li><%= link_to 'Sign Out',	destroy_student_session_path, :method => :delete %></li>
 
           <% elsif tutor_signed_in?%>
             <li><%= link_to 'Tutor Home', tutor_path(current_tutor) %></li>
+            <% current_tutor.courses.each do |course| %>
+                <li> <%= link_to "See past answers for #{course}", tutors_answers_path(course, current_tutor) %> </li>
+             <% end %>
             <li><%= link_to 'Edit Profile', edit_tutor_registration_path %></li>
             <li><%= link_to 'Sign Out', destroy_tutor_session_path, :method => :delete %></li>
 
           <% elsif admin_signed_in? %>
             <li><%= link_to 'Sign Out', destroy_admin_session_path, :method => :delete %></li>
           <% else %>
-            <li><%= link_to "Student Sign In",			new_student_session_path %></li>
-            <li><%= link_to "Tutor Sign In",      new_tutor_session_path %></li>
-            <li><%= link_to "Student Sign Up",	new_student_registration_path %></li>
-            <li><%= link_to "Tutor Sign Up",		new_tutor_registration_path %></li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Sign in <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Student Sign In",			new_student_session_path %></li>
+                 <li><%= link_to "Tutor Sign In",      new_tutor_session_path %></li>
+              </ul>
+            </li>
           <% end %>
         </ul>
       </nav>
     </div>
   </div>
+</header>

@@ -1,0 +1,35 @@
+<h1>Answer Page</h1>
+
+<% if !@answers.any? %>
+	<p> No questions answered yet </p>
+<% else %>
+
+<table id = "inbox_question_list", class="display">
+	<thead>
+		<tr>
+			<th>Subject</th>
+			<th>Your Answer</th>
+			<th>Date answered</th>
+			<th>Follow Up Questions?</th>
+		</tr>
+	</thead>
+
+<tbody>
+<% for answer in @answers %>
+<% qid = answer.question_id %>
+<% question = Question.find_by_id(qid) %>
+	<tr>
+		<td><%= link_to question.subject, specific_answer_path(answer.id, current_tutor, qid) %> </td>
+		<td><%= truncate(answer.content) %> </td>
+		<td><%= answer.created_at %> </td>
+		<td> HOLDER </td>
+	</tr>
+<% end %>
+</tbody>
+</table>
+
+	<%# for answer in @answers %>
+		<li><%#= answer.content %></li>
+	<%# end %>
+
+<% end %>

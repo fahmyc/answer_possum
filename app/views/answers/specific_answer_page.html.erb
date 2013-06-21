@@ -1,0 +1,31 @@
+<h1> Question Subject: <%= @question.subject %> </h1>
+
+<h2> Question: <%= @question.content %> </h2>
+
+<h2> Answer: <%= @answer.content %> </h2>
+
+<h3> Comments: </h3>
+
+<% for c in @comments %>
+	<% if c.student_sent? %>
+		<p>
+			<br><strong>Student: </strong><%= c.content %></br>
+			<br><strong>Posted at:</strong> <%= c.created_at %></br>
+		</p>
+	<% else %>
+		<p>
+			<br><strong>You: </strong><%= c.content %></br>
+			<br><strong>Posted at:</strong> <%= c.created_at %></br>
+		</p>
+	<% end %>
+<% end %>
+
+Send comment:
+	<%= simple_form_for(@comment) do |f| %>
+		<%= f.text_area :content, placeholder: "Comment?" %>
+		<%= f.input :answer_id, as: :hidden, :input_html => { :value => @answer.id} %>
+		<%= f.input :student_id, as: :hidden, :input_html => { :value => @student.id} %>
+		<%= f.input :student_sent, as: :hidden, :input_html => { :value => 0} %>
+		<%= f.button :submit, label: "Send comment" %>
+	<% end %>
+

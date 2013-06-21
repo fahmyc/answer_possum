@@ -15,5 +15,12 @@ class Student < ActiveRecord::Base
   has_many :ratings
   has_many :answers
   has_many :bookings
+  has_many :comments
+
+before_save :clear_empty_courses
+
+  def clear_empty_courses
+    self.courses.reject!{|x| x==''}
+  end
 
 end

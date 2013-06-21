@@ -11,6 +11,10 @@ class RatingsController < ApplicationController
       view_context.tutor_rating
       tutor_rating(tutor_id, rating)
 
+      #if rating>0
+       # @rating.positive_rating == 1
+      #end
+
       #tutor = Tutor.find_by_id(:tutor_id)
       #tutor.update_attributes(rating: :rating)
       #rating = tutor.ratings.sum(:rating)

@@ -9,8 +9,8 @@
 		<tr>
 			<th>Subject</th>
 			<th>Your Answer</th>
-			<th>Date answered</th>
-			<th>Follow Up Questions?</th>
+			<th>Date Answered</th>
+			<th>Number of Comments</th>
 		</tr>
 	</thead>
 
@@ -18,11 +18,12 @@
 <% for answer in @answers %>
 <% qid = answer.question_id %>
 <% question = Question.find_by_id(qid) %>
+<% comments = Comment.find(:all, :conditions => {:answer_id=>answer.id}) %>
 	<tr>
 		<td><%= link_to question.subject, specific_answer_path(answer.id, current_tutor, qid) %> </td>
 		<td><%= truncate(answer.content) %> </td>
 		<td><%= answer.created_at %> </td>
-		<td> HOLDER </td>
+		<td><%= comments.count %></td>
 	</tr>
 <% end %>
 </tbody>

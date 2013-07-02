@@ -1,28 +1,31 @@
-<h1> Question Subject: <%= @question.subject %> </h1>
+<h4> Question Subject: <%= @question.subject %> </h4>
 
-<h2> Question: <%= @question.content %> </h2>
+<h1> Question: <%= @question.content %> </h1>
 
-<h2> Answer: <%= @answer.content %> </h2>
+<h2> Your Answer: <%= @answer.content %> </h2>
 
 <h3> Comments: </h3>
-
 <% for c in @comments %>
-	<% if c.student_sent? %>
-		<p>
-			<br><strong>Student: </strong><%= c.content %></br>
-			<br><strong>Posted at:</strong> <%= c.created_at %></br>
-		</p>
-	<% else %>
-		<p>
-			<br><strong>You: </strong><%= c.content %></br>
-			<br><strong>Posted at:</strong> <%= c.created_at %></br>
-		</p>
+	<% if @comments.any? %>
+
+		<% if c.student_sent? %>
+			<p>
+				<br><strong>Student: </strong><%= c.content %></br>
+				<br><strong>Posted at:</strong> <%= c.created_at %></br>
+			</p>
+		<% else %>
+			<p>
+				<br><strong>You: </strong><%= c.content %></br>
+				<br><strong>Posted at:</strong> <%= c.created_at %></br>
+			</p>
+		<% end %>
+	<!--<%# else %>
+		<strong>No comments sent, to send a comment to a student, type one out below</strong> -->
 	<% end %>
 <% end %>
 
-Send comment:
 	<%= simple_form_for(@comment) do |f| %>
-		<%= f.text_area :content, placeholder: "Comment?" %>
+		<%= f.input :content, placeholder: "Send comment...", input_html: {style: 'height:100px; width:500px;'} %>
 		<%= f.input :answer_id, as: :hidden, :input_html => { :value => @answer.id} %>
 		<%= f.input :student_id, as: :hidden, :input_html => { :value => @student.id} %>
 		<%= f.input :student_sent, as: :hidden, :input_html => { :value => 0} %>

@@ -5,9 +5,10 @@
         <ul class="nav pull-left">
           <% if !student_signed_in? & !tutor_signed_in? %>
             <li><%= link_to "Home", 		root_path %></li>
+            <li><%= link_to "FAQ",     faq_path %></li>
+            <li><%= link_to "Contact",  contact_path %></li>
             <% end %>
-            <li><%= link_to "FAQ", 		faq_path %></li>
-            <li><%= link_to "Contact", 	contact_path %></li>
+
             <li><%= feedback_tab(:position => 'right') %></li>
 
         </ul>
@@ -20,10 +21,21 @@
             <li><%= link_to 'Sign Out',	destroy_student_session_path, :method => :delete %></li>
 
           <% elsif tutor_signed_in?%>
+            <ul class = "nav pull-left">
             <li><%= link_to 'Tutor Home', tutor_path(current_tutor) %></li>
-            <% current_tutor.courses.each do |course| %>
-                <li> <%= link_to "See past answers for #{course}", tutors_answers_path(course, current_tutor) %> </li>
-             <% end %>
+            </ul>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                See your past answers and any students comments <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <% current_tutor.courses.each do |course| %>
+                    <li> <%= link_to "#{course}", tutors_answers_path(course, current_tutor) %> </li>
+                 <% end %>
+              </ul>
+            </li>
+
+
             <li><%= link_to 'Edit Profile', edit_tutor_registration_path %></li>
             <li><%= link_to 'Sign Out', destroy_tutor_session_path, :method => :delete %></li>
 

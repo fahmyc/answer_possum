@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_filter :tutor_signed_in?
-  before_filter :correct_tutor, only: :answer_page
+  before_filter :correct_tutor, only: [:answer_page, :specific_answer_page]
+ # before_filter :correct_tutor2, only: [:specific_answer_page]
 
   def create
     @answer = current_tutor.answers.build(params[:answer])
@@ -46,6 +47,7 @@ class AnswersController < ApplicationController
     
     correct_question_id = @answers.collect(&:question_id)
     @questions = Question.find(:all, :conditions =>{:id => correct_question_id})
+
   end
 
   def specific_answer_page
@@ -59,6 +61,7 @@ class AnswersController < ApplicationController
     #@comment = current_tutor.comments.build if tutor_signed_in?
     @comment = current_tutor.comments.build if tutor_signed_in?
 
+
   end
   
 private
@@ -67,6 +70,19 @@ private
       @tutor = Tutor.find(params[:tutor_id])
       redirect_to(tutor_path(current_tutor)) unless current_tutor?(@tutor)
     end
+
+    def correct_tutor2
+      answer = Answer.find(:all, :conditions=> ['tutor_id =?', params[:tutor_id]])
+      answer_ids = answer.collect(&:id)
+
+#need to re-write this, find out if you can say "if just ONE of the answer id's is correct, do NOT redirect to tutor_path"
+      answer_ids.each do |x|
+        if x != params[:id]
+          redirect_to(tutor_path(current_tutor))
+        end
+      end
+    end
+
     def correct_student
       @student = Student.find(params[:id])
       redirect_to(student_path(current_student)) unless current_student?(@student)

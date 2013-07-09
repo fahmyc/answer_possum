@@ -39,7 +39,7 @@ class DeviseCreateTutors < ActiveRecord::Migration
 
     add_index :tutors, :email,                :unique => true
     add_index :tutors, :reset_password_token, :unique => true
-    #add_index :courses
+    add_index :courses
     # add_index :tutors, :confirmation_token,   :unique => true
     # add_index :tutors, :unlock_token,         :unique => true
     # add_index :tutors, :authentication_token, :unique => true

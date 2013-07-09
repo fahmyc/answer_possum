@@ -47,6 +47,10 @@ padding-top: 5px;
 padding-bottom: 40px; 
 }
 
+.row_contact-us{
+  padding-top:0px;
+}
+
 
 .center {
   text-align: center;
@@ -62,4 +66,10 @@ height: 25px;
 
 .contact_profile{
   font-size:1.1em;
+}
+
+.ui-accordion-header{
+  background:none;
+   background-color:blue;
+
 }

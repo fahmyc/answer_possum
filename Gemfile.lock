@@ -107,10 +107,10 @@ GEM
     mini_portile (0.5.1)
     multi_json (1.7.7)
     multi_test (0.0.1)
-    mysql (2.9.1-x86-mingw32)
     nokogiri (1.6.0-x86-mingw32)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
+    pg (0.12.2-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -207,7 +207,7 @@ DEPENDENCIES
   jquery-datatables-rails!
   jquery-rails (~> 2.0.2)
   jquery-ui-rails
-  mysql (= 2.9.1)
+  pg (= 0.12.2)
   rails (= 3.2.13)
   rspec-rails (= 2.11.0)
   sass-rails (= 3.2.5)

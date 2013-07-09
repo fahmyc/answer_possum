@@ -1,3 +1,4 @@
+class DeviseCreateStudents < ActiveRecord::Migration
   def change
     create_table(:students) do |t|
       ## Database authenticatable

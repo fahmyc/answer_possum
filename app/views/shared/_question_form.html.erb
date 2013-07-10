@@ -1,6 +1,6 @@
 <%= simple_form_for(@question) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
- <div class="row">
+ <div class="row_question">
   <div class="span6 offset1">
 	<%= f.input :courses, collection: @courses, as: :radio %>
 	<%= f.input :subject, hint: "Short description of question" %>

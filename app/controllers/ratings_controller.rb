@@ -11,6 +11,9 @@ class RatingsController < ApplicationController
       view_context.tutor_rating
       tutor_rating(tutor_id, rating)
 
+      view_context.count_tutor_ratings
+      count_tutor_ratings(tutor_id)
+
       #if rating>0
        # @rating.positive_rating == 1
       #end

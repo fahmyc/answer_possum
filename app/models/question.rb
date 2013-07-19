@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :content, :courses, :subject, :student_id
+  attr_accessible :content, :courses, :subject, :student_id, :open
   belongs_to :student
   has_many :answers
   
@@ -12,6 +12,12 @@ class Question < ActiveRecord::Base
 #  def feed
  # 	Question.where("courses = ?", courses)
   #end
+#  before_save :default_open
+
+ # def default_open
+ #   self.open? ||= 1
+ # end
+
 
     private
 

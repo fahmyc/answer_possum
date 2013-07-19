@@ -1,12 +1,13 @@
 <%= simple_form_for(@question) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
- <div class="row">
-  <div class="span6 offset1">
-	<%= f.input :courses, collection: @courses, as: :radio %>
-	<%= f.input :subject, hint: "Short description of question" %>
-	<%= f.input :content, as: :text, placeholder: "Ask a new Question...", input_html: {style: 'height:100px; width:500px;'} %>
-    <%#= f.text_area :content, placeholder: "Ask a new Question..." %>
-	<%= f.button :submit, label: "Ask Question", class: "btn btn-large btn-primary" %>
-</div>
+ <div class="row1">
+  	<div class="offset1">
+		<%= f.input :courses, collection: @courses, as: :radio %>
+		<%= f.input :subject, hint: "Short description of question" %>
+		<%= f.input :content, as: :text, placeholder: "Ask a new Question...", input_html: {style: 'height:100px; width:500px;'} %>
+		<%= f.input :open, as: :hidden, :input_html => { :value => true } %>
+	    <%#= f.text_area :content, placeholder: "Ask a new Question..." %>
+		<%= f.button :submit, "Ask Question", class: "btn btn-large btn-primary" %>
+	</div>
 </div>
 <% end %>

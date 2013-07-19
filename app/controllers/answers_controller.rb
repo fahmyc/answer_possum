@@ -23,18 +23,34 @@ class AnswersController < ApplicationController
       #view_context.tutor_rating
       #tutor_rating(t,r)
 
+    #Sum of rating
     tutor = Tutor.find_by_id(t)
     current_rating = tutor.rating.to_f
     new_rating = r.to_f + current_rating
     tutor.update_attributes(rating: new_rating)
 
-    #zero = 0
-     # if r > zero
-      #  @answer.update_attributes(positive_rating: 1)
-      #end
+    #update nuber of ratings
+    current_number_of_ratings = tutor.number_of_ratings.to_f + 1
+    tutor.update_attributes(number_of_ratings: current_number_of_ratings)
+
+    #update positive ratings
+    if (r.to_f >= 1)
+      current_number_of_positive_ratings = tutor.number_of_positive_ratings.to_f + 1
+      tutor.update_attributes(number_of_positive_ratings: current_number_of_positive_ratings)
+    end
+
+    #update rating percentage
+    if (r.to_f >= 1)
+      current_rating_percentage = current_number_of_positive_ratings/current_number_of_ratings
+      tutor.update_attributes(rating_percentage: current_rating_percentage)
+    else
+      current_rating_percentage = tutor.number_of_positive_ratings/current_number_of_ratings
+      tutor.update_attributes(rating_percentage: current_rating_percentage)
+    end
 
       flash[:success] = "Thanks for rating this answer!"
-      redirect_to students_inbox_path(current_student)
+      redirect_to :back
+      #redirect_to students_inbox_path(current_student)
     else
       render 'static_pages/bad'
     end

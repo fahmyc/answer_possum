@@ -4,6 +4,9 @@
 	<h3> No one has rated any of your answers yet </h3>
 <% else %>
 	<h2>Rating: <%= @tutors.rating %></h2>
+	<h2>Level: <%= @level %></h2>
+	<h2>Average: <%= number_to_percentage(@tutors.rating_percentage.to_f * 100, precision: 0) %></h2>
+	<!-- This rating percentage is also used in the tutors index -->
 <% end %>
 
     See Questions for:

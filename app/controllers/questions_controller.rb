@@ -12,7 +12,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @questions = Question.find(:all, :conditions => ['courses = ?', params[:id]] )
+    @questions = Question.find(:all, :conditions => { :courses => params[:id], :open => ['t', nil] }) 
+    #@questions = Question.find(:all, :conditions => ['courses = ?', params[:id]] )
     #find(:conditions => ['courses = ?', params[:courses]])
     #find_all_by_courses(params[:courses])
     @subjects = @questions.collect(&:subject)
@@ -45,6 +46,15 @@ class QuestionsController < ApplicationController
     #answer = Answer.find(id)
     #@follow_up_question = answer.follow_up_questions.build if student_signed_in?
   end
+
+  def update
+    @question = Question.find_by_id(params[:id])  
+    @question.open = false
+    @question.update_attributes({:open => false})
+    redirect_to :back
+  end
+
+
 
  # def rating
   #  value = params[:type] = "up" ? 1 : -1

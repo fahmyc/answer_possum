@@ -4,6 +4,18 @@
 <p> <%= @question.content %> </p>
 
 
+
+<%#= link_to("Close Question", questions_qna_path(params[:id], params[:student_id]), {:method => :put, :confirm => "Are you sure?"}) %>
+<% if @question.open? %>
+	<%= simple_form_for(@question) do |f| %>
+		<%= f.input :open, as: :hidden, :input_html => { :value => false } %>
+		<%= f.button :submit,"CLOSE QUESTION", :confirm => "Are you sure you want to close the question? By doing so, tutors can no longer answer this question." %>
+	<% end %>
+<% else %>
+	Question closed
+<% end %>
+
+<br></br>
 <% if @answers_to_question.any? %>
 
 <% for answer in @answers_to_question %>
@@ -12,9 +24,16 @@
 <% tutor = Tutor.find_by_id(tutorid) %>
 <% answerid = answer.id %>
 
+
+
 	<div class = "accordion_menu">
 		
-		<h3><%= tutor.name %> answered question on <%= answer.created_at %> </h3>
+		<% if answer.rating == nil %>
+			<h3><%= tutor.name %> &nbsp &nbsp &nbsp &nbsp answered question on <%= answer.created_at %>. &nbsp &nbsp &nbsp &nbsp  <span class="badge badge-warning">Unrated</span></h3>
+		<% else %>
+			<h3><%= tutor.name %> answered question on <%= answer.created_at %>. Your rating: <%= answer.rating %> </h3>
+		<% end %>
+
 		<div>
 			<p><%= answer.content %></p>
 
@@ -27,7 +46,7 @@
 						<%= f.input :student_id, as: :hidden, :input_html => { :value => params[:student_id] } %>
 						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid } %>
 						<%= f.input :answer_id, as: :hidden, :input_html => { :value => answerid } %>
-						<%= f.button :submit, label: "RATE ANSWER" %>
+						<%= f.button :submit,"RATE ANSWER" %>
 					<% end %>
 
 				<% else %>
@@ -59,11 +78,11 @@
 			<p> 
 					<%# @comment = current_student.comments.build if student_signed_in? %>
 					<%= simple_form_for(@comment) do |f| %>
-						<%= f.text_area :content, placeholder: "Follow up question or comment?" %>
+						<%= f.input :content, as: :text, placeholder: "Follow up question or comment?", input_html: {style: 'height:100px; width:500px;'} %>
 						<%= f.input :answer_id, as: :hidden, :input_html => { :value => answerid} %>
 						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid} %>
 						<%= f.input :student_sent, as: :hidden, :input_html => { :value => 1} %>
-						<%= f.button :submit, label: "Send comment" %>
+						<%= f.button :submit, "Send comment" %>
 					<% end %>	
 				</p>
 				

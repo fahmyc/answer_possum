@@ -4,6 +4,8 @@
 	<thead>
 		<tr>
 			<th>Subject</th>
+			<th>Open or closed?</th>
+			<th>Rated?</th>
 			<th>Course</th>
 			<th>Date asked</th>
 			<th>Number of Answers</th>
@@ -12,11 +14,44 @@
 
 <tbody>
 <% @questions.each do |question| %>
+	<% answers = Answer.find(:all, :conditions => ['question_id = ?', question]) %>
+	<% rated_answers = answers.collect(&:rating) %>
+	<% counter = 0 %>
+	<% for rating in rated_answers %>
+		<% if rating.blank? %>
+			<% counter = counter + 1 %>
+		<% end %>
+	<% end %>
+
 	<tr>
-		<td><%= link_to question.subject, questions_qna_path(question.id, current_student) %> </td>
+		<td>
+			<%= link_to question.subject, questions_qna_path(question.id, current_student) %> 
+
+		</td>
+		<td>
+			<% if question.open? %>
+				<p class="text-success">Open</p> 
+					<%= simple_form_for(question) do |f| %>
+						<%= f.input :open, as: :hidden, :input_html => { :value => false } %>
+						<div class="close_question_button">
+							<%= f.button :submit,"Close Q", :confirm => "Are you sure you want to close the question? By doing so, tutors can no longer answer this question."%>
+						</div>
+					<% end %>
+			<% else %>
+				Closed
+			<% end %>
+		</td>
+		<td>
+			<%# if counter.to_f > 0 && question.open? %>
+			<% if counter.to_f > 0 %>
+				<center><span class="badge badge-warning">Unrated Answers</span></center>
+			<% else %>
+				<center><span class="badge badge-success"><i class="icon-ok icon-white"></i></span></center>
+			<% end %>
+		</td>
 		<td><%= question.courses %> </td>
 		<td><%= question.created_at %> </td>
-		<td><%= Answer.find(:all, :conditions => ['question_id = ?', question]).count %> </td>
+		<td><%= answers.count %> </td>
 	</tr>
 <% end %>
 </tbody>

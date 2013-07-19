@@ -13,10 +13,29 @@
 
         </ul>
         <ul class="nav pull-right">
+          <!-- THIS is me trying to find out if this student has any answers that aren't yet rated, we need to find the student id from the questions table, then look in the answers table with the question id to see if any answers have a nil rating, if so we need to notify-->
+          <% counter = 0 %>
           <% if student_signed_in? %>
+            <% student_id = current_student.id %>
+            <% questions = Question.find(:all, :conditions => { :student_id => student_id, :open => ['t', nil] }) %>
+            <% question_ids = questions.collect(&:id) %>
+            <% for qid in question_ids %>
+              <% answers = Answer.find(:all, :conditions => ['question_id = ?', qid]) %>
+              <% for answer in answers %>
+                    <% if answer.rating.blank? %>
+                      <% counter = counter + 1 %>
+                    <% end %>
+              <% end %>
+            <% end %>
+
             <li><%= link_to 'Student Home', student_path(current_student) %></li>
-            <li><%= link_to 'Your Inbox', students_inbox_path(current_student) %></li>
-            <li><%= link_to 'Tutor List (book tutors here!)', tutors_path %></li>
+            <% if counter.to_f > 0 %>
+              <!-- Fix the notification, don't just keep it as "unrated questions"-->
+              <li><%= link_to 'Your Inbox UNRATED QUESTIONS', students_inbox_path(current_student) %></li>
+            <% else %>
+              <li><%= link_to 'Your Inbox', students_inbox_path(current_student) %></li>
+            <% end %>
+            <li><%= link_to 'Tutor List (Book Tutors Here!)', tutors_path %></li>
             <li><%= link_to 'Edit Profile', edit_student_registration_path %></li>
             <li><%= link_to 'Sign Out',	destroy_student_session_path, :method => :delete %></li>
 

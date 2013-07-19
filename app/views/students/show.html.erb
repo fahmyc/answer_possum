@@ -2,10 +2,13 @@
 My email: <%= @students.email %>
   <p>
     Courses I'm taking:
-    <% @students.courses.each do |course| %>
-      <li> <%= course %> </li>
-    <% end %>
+      <% @students.courses.each do |course| %>
+        <%# tutors_in_course = Tutor.find(:all, :conditions => ['courses'], course) %>
+        <li> <%= course %> <!--(tutors_in_course.count tutors)--> </li>
+      <% end %>
+
   </p>
+  
 	<%= render 'shared/question_form' %>
 
   <!--

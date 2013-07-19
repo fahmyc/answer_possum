@@ -5,6 +5,17 @@ class TutorsController < ApplicationController
 
 	def show
 		@tutors = Tutor.find(params[:id])
+    
+  #Need to copy and paste this to index view (not the exact same)
+  #Also copy and paste this exact to tutor_profile EXCEPT for "tutor" insted of "tutors"
+    if @tutors.rating > 30
+      @level = "Advanced"
+    elsif @tutors.rating  > 10 && @tutors.rating <= 30
+      @level = "Novice"
+    elsif @tutors.rating <= 10
+      @level = "Rookie"
+    end
+
 	end
 
 	def update
@@ -16,6 +27,15 @@ class TutorsController < ApplicationController
 
   def tutor_profile
   	@tutor = Tutor.find_by_id(params[:tutor_id])
+
+    if @tutor.rating > 30
+      @level = "Advanced"
+    elsif @tutor.rating  > 10 && @tutor.rating <= 30
+      @level = "Novice"
+    elsif @tutor.rating <= 10
+      @level = "Rookie"
+    end
+
   end
 
 

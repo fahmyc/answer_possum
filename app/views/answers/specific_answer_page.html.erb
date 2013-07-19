@@ -29,6 +29,6 @@
 		<%= f.input :answer_id, as: :hidden, :input_html => { :value => @answer.id} %>
 		<%= f.input :student_id, as: :hidden, :input_html => { :value => @student.id} %>
 		<%= f.input :student_sent, as: :hidden, :input_html => { :value => 0} %>
-		<%= f.button :submit, label: "Send comment" %>
+		<%= f.button :submit, "Send comment" %>
 	<% end %>
 

@@ -11,8 +11,16 @@ padding-bottom: 40px;
  
 }
 
+.btn btn-warning{
+  color: black;
+}
+
 .signed_in_home{
   height: 350px;
+  color: white;
+}
+
+.close_question_button{
   color: white;
 }
 
@@ -23,6 +31,11 @@ padding-bottom: 40px;
 .footer{
 	background:white;
 	width: 100%;
+}
+
+.row1{
+padding-top: 10px;
+  padding-bottom: 40px; 
 }
 
 .home {

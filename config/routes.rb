@@ -19,7 +19,7 @@ AnswerPossum::Application.routes.draw do
   resources   :students, :only => [:show]
   resources   :admins
   resources   :tutors
-  resources   :questions, :only => [:create, :destroy, :show]
+  resources   :questions
   resources   :answers 
   resources   :ratings
   resources   :bookings
@@ -40,7 +40,7 @@ AnswerPossum::Application.routes.draw do
   match 'admins/:id',        to: 'admins#show', :as => "admin_show"
   match 'questions/:courses', to: 'questions#show', :as => "questions_courses", :via => "get"
   match 'students/:id/inbox', to: 'students#inbox', :as => "students_inbox",    :via => "get" #
-  match 'questions/qna/:id/:student_id', to: 'questions#qna', :as => "questions_qna",    :via => "get"
+  match 'questions/qna/:id/:student_id', to: 'questions#qna', :as => "questions_qna"#,    :via => "get"
   match 'bookings/:student_id/:tutor_id', to:'bookings#booking', :as =>"bookings_booking", :via => "get"
   match 'tutors/profile/:tutor_id',    to: 'tutors#tutor_profile',  :as => "tutors_profile", :via => "get"
   match 'answers/:courses/:tutor_id',   to: 'answers#answer_page',    :as => "tutors_answers", :via =>"get"

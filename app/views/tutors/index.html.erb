@@ -6,6 +6,8 @@
 			<th>Tutor Name</th>
 			<th>Courses</th>
 			<th>Rating</th>
+			<th>Level</th>
+			<th>Success Percentage</th>
 			<th> </th>
 		</tr>
 	</thead>
@@ -24,7 +26,25 @@
   					<%= tutor.rating %>
   				<% end %>
 		</td>
+		<td>
+			<% if tutor.rating.to_i >= 31 %>
+				Advanced
+			<% elsif tutor.rating.to_i >= 11 && tutor.rating.to_i <= 30 %>
+				Novice
+			<% elsif tutor.rating.to_i <= 10 %>
+				Rookie
+			<% end %>
+
+		</td>
+		<td>
+			<% if tutor.rating_percentage == nil %>
+				(No ratings yet)
+			<% else %>
+				<%= number_to_percentage(tutor.rating_percentage.to_f * 100, precision: 0) %>
+			<% end %>
+		</td>
 		<td><%= link_to "BOOK ME!", bookings_booking_path(current_student, tutor.id) %></td>
+
 	</tr>
 <% end %>
 </tbody>

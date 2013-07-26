@@ -8,9 +8,43 @@
 	<h2>Average: <%= number_to_percentage(@tutors.rating_percentage.to_f * 100, precision: 0) %></h2>
 	<!-- This rating percentage is also used in the tutors index -->
 <% end %>
+<div class = "row1">
+	<div class="span1"><br></br></div>
+	<div class="span3">
+	    <h3>See Questions for:</h3>
+	    <% current_tutor.courses.each do |course| %>
+	      <li> 
+			<%= link_to course, questions_courses_path(course) %> 
 
-    See Questions for:
-    <% current_tutor.courses.each do |course| %>
-      <li> <%= link_to course, questions_courses_path(course) %> </li>
-    <% end %>
+	      </li>
+	    <% end %>
+	</div>
+
+	<div class="span3"><br></br></div>
+
+	<div class = "span5">
+		<h3>See your past answers:</h3>
+	        <% current_tutor.courses.each do |course| %>
+	    <li> <%= link_to "#{course}", tutors_answers_path(course, current_tutor) %> 
+	    	
+			<% course_questions = Question.find(:all, :conditions => {:courses => course}) %>
+			<% question_ids = course_questions.collect(&:id) %>
+			<% answers_to_questions = Answer.find(:all,  :conditions => {:question_id => question_ids})%>
+			<% answer_ids = answers_to_questions.collect(&:id) %>
+			<% comments = Comment.find(:all, :conditions => {:answer_id => answer_ids, :tutor_id => params[:id]}) %>
+			<% counter = 0 %>
+			<% for comment in comments %>
+				<% if (!comment.read? || comment.read.nil?) && comment.student_sent? %>
+					<% counter = counter + 1 %>
+				<% end %>
+			<% end %>
+			<% if counter.to_f > 0 %>
+				(Unread comments)
+			<% end %>
+
+	    </li>
+	 <% end %>
+	</div>
+
+</div>
 </div>

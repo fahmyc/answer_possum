@@ -73,12 +73,20 @@ class AnswersController < ApplicationController
     @comments = Comment.find(:all, :conditions => ['answer_id =?', params[:id]])
     @student = Student.find(@question.student_id)
 
+    @read_student_comments = Comment.find(:all, :conditions =>{:answer_id => params[:id], :student_sent =>'t', :read => ['t']})
+
+    @unread_student_comments = Comment.find(:all, :conditions =>{:answer_id => params[:id], :student_sent =>'t', :read => ['f', nil]})
+    for comment in @unread_student_comments
+    comment.update_attributes(read: true)
+  end
 
     #@comment = current_tutor.comments.build if tutor_signed_in?
     @comment = current_tutor.comments.build if tutor_signed_in?
-
-
   end
+
+def unread_comment
+  
+end
   
 private
 

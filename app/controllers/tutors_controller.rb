@@ -16,6 +16,7 @@ class TutorsController < ApplicationController
       @level = "Rookie"
     end
 
+
 	end
 
 	def update
@@ -23,16 +24,16 @@ class TutorsController < ApplicationController
 
 	def index
     	@tutors = Tutor.paginate(page: params[:page])
-  	end
+  end
 
   def tutor_profile
   	@tutor = Tutor.find_by_id(params[:tutor_id])
 
-    if @tutor.rating > 30
+    if @tutor.rating.to_f > 30
       @level = "Advanced"
-    elsif @tutor.rating  > 10 && @tutor.rating <= 30
+    elsif @tutor.rating.to_f  > 10 && @tutor.rating.to_f <= 30
       @level = "Novice"
-    elsif @tutor.rating <= 10
+    elsif @tutor.rating.to_f <= 10
       @level = "Rookie"
     end
 

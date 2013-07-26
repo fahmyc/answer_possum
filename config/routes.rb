@@ -45,7 +45,17 @@ AnswerPossum::Application.routes.draw do
   match 'tutors/profile/:tutor_id',    to: 'tutors#tutor_profile',  :as => "tutors_profile", :via => "get"
   match 'answers/:courses/:tutor_id',   to: 'answers#answer_page',    :as => "tutors_answers", :via =>"get"
   match 'answers/:id/:tutor_id/:question_id',     to: 'answers#specific_answer_page', :as => "specific_answer"
-
+  
+##buttons
+#button to close all questions
+  match '/students/:id/close_all' => 'students#close_all', :as => 'close_all_questions_button'
+#button to make comment unread on tutor side
+  match 'tutors/:answer_id/:question_id/unread_comment' => 'comments#tutor_side_unread_comments', :as => 'tutor_side_make_comment_unread'
+#buttons to make comment read on student side
+  match 'comments/:answer_id/:tutor_id/read_comment' => 'comments#read_comment', :as => 'make_comments_read'
+#buttons to make comment unread on student side
+#button to make comment unread on tutor side
+  match 'students/:answer_id/:question_id/unread_comment' => 'comments#student_side_unread_comments', :as => 'student_side_make_comment_unread'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

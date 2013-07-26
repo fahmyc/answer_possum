@@ -16,6 +16,7 @@
 
 $(document).ready(function(){
 	$('.accordion_menu').accordion({collapsible: true, active: false});
+	
 });	
 
 

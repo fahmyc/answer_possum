@@ -1,13 +1,18 @@
 <h1> BOOKING!!! </h1>
 
 <h2>Tutor: <%= @tutor.name.capitalize %></h2>
+<!--
+<div class="span6">
 
+<p>Request a time for a tutor or ask the tutor when he/she is available! When you press "Send booking request", the tutor will receive your message along with your email address to reply.</p>
+</div>
+<br></br>
+-->
 <%= simple_form_for(@booking) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-	<%= f.input :content, as: :text, placeholder: "Type body of the email.", input_html: {style: 'height:100px; width:500px;'} %>
+	<%= f.input :content, as: :text, placeholder: "Request a time or ask when the tutor is free...", input_html: {style: 'height:100px; width:500px;'} %>
 	<%= f.input :student_id, as: :hidden, :input_html => { :value => @student.id } %>
 	<%= f.input :tutor_id, as: :hidden, :input_html => { :value => @tutor.id } %>
-	<%= f.input :email_confirmation, inline_label: 'Send me a request confirmation email' %>
 	<%= f.button :submit, "Send booking request" %>
 <% end %>

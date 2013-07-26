@@ -15,6 +15,10 @@ padding-bottom: 40px;
   color: black;
 }
 
+.unrated_answers{
+  color: red;
+}
+
 .signed_in_home{
   height: 350px;
   color: white;
@@ -51,6 +55,10 @@ padding-bottom: -40px;
 
 }  
 
+ul{
+  list-style-type: none;
+}
+
 .nav li {  
 padding-top: 5px;  
 }
@@ -58,6 +66,24 @@ padding-top: 5px;
 .row{
 	padding-top: 60px;  
 padding-bottom: 40px; 
+}
+
+
+.row1{
+    padding-top: 10px;  
+  padding-bottom: 121px;
+}
+
+.row2{
+      padding-top: 10px;  
+      padding-bottom: 450px;
+}
+
+.box1{
+    margin-left:auto;
+  margin-right:auto;
+  border:2px solid black;   
+  position:relative;
 }
 
 .row_contact-us{

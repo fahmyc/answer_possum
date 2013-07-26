@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718132941) do
+ActiveRecord::Schema.define(:version => 20130724174554) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130718132941) do
     t.integer  "rating"
     t.integer  "student_id"
     t.integer  "foq_helper"
+    t.boolean  "read"
   end
 
   create_table "bookings", :force => true do |t|
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130718132941) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.boolean  "student_sent"
+    t.boolean  "read"
   end
 
   add_index "comments", ["student_id", "tutor_id", "answer_id"], :name => "index_comments_on_student_id_and_tutor_id_and_answer_id"

@@ -12,6 +12,20 @@ class StudentsController < ApplicationController
 	def inbox
 		@students = Student.find(params[:id])
 		@questions = @students.questions
+		@open_questions = Question.find(:all, :conditions =>{:student_id => params[:id], :open => ['t', nil]})
+	end
+
+	def close_all
+		@student = Student.find(params[:id])
+		@questions_to_close = @student.questions
+
+		for question in @questions_to_close
+			if question.open? || question.open.nil?
+				question.update_attributes(open: false)
+			end
+		end
+
+		redirect_to students_inbox_path(current_student)
 	end
 	
 	  private

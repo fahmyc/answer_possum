@@ -30,6 +30,11 @@ class QuestionsController < ApplicationController
 
     @comment = current_student.comments.build if student_signed_in?
 
+    unread_comments = Comment.find(:all, :conditions =>{:answer_id => params[:id], :read => ['f', nil] })
+      for comment in unread_comments
+        comment.update_attributes(read: true)
+      end 
+
     #for answer in @answers_to_question
      # tutorid = answer.tutor_id
       #tutor = Tutor.find_by_id(tutorid)
@@ -46,6 +51,7 @@ class QuestionsController < ApplicationController
     #answer = Answer.find(id)
     #@follow_up_question = answer.follow_up_questions.build if student_signed_in?
   end
+
 
   def update
     @question = Question.find_by_id(params[:id])  

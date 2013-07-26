@@ -28,13 +28,29 @@
               <% end %>
             <% end %>
 
+      <% answers = Answer.find(:all,  :conditions => {:question_id => question_ids})%>
+      <% answer_ids = answers.collect(&:id) %>
+      <% comments = Comment.find(:all, :conditions => {:answer_id => answer_ids}) %>
+      <% counter1 = 0 %>
+      <% for comment in comments %>
+        <% if (!comment.read? || comment.read.nil?) && !comment.student_sent? %>
+          <% counter1 = counter1 + 1 %>
+        <% end %>
+      <% end %>
+
+
             <li><%= link_to 'Student Home', student_path(current_student) %></li>
-            <% if counter.to_f > 0 %>
-              <!-- Fix the notification, don't just keep it as "unrated questions"-->
-              <li><%= link_to 'Your Inbox UNRATED QUESTIONS', students_inbox_path(current_student) %></li>
+
+            <% if counter.to_f > 0 && counter1.to_f < 1 %>
+              <li><%= link_to 'Your Inbox UNRATED ANSWERS', students_inbox_path(current_student) %></li>
+            <% elsif counter.to_f > 0 && counter1.to_f > 0 %>
+              <li><%= link_to 'Your Inbox UR AND UC', students_inbox_path(current_student) %></li>
+            <% elsif counter.to_f < 1 && counter1.to_f > 0 %>
+              <li><%= link_to 'Your Inbox UNREAD COMMENTS', students_inbox_path(current_student) %></li>
             <% else %>
               <li><%= link_to 'Your Inbox', students_inbox_path(current_student) %></li>
             <% end %>
+
             <li><%= link_to 'Tutor List (Book Tutors Here!)', tutors_path %></li>
             <li><%= link_to 'Edit Profile', edit_student_registration_path %></li>
             <li><%= link_to 'Sign Out',	destroy_student_session_path, :method => :delete %></li>
@@ -43,6 +59,7 @@
             <ul class = "nav pull-left">
             <li><%= link_to 'Tutor Home', tutor_path(current_tutor) %></li>
             </ul>
+            <!--
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 See your past answers and any students comments <b class="caret"></b>
@@ -53,7 +70,7 @@
                  <% end %>
               </ul>
             </li>
-
+-->
 
             <li><%= link_to 'Edit Profile', edit_tutor_registration_path %></li>
             <li><%= link_to 'Sign Out', destroy_tutor_session_path, :method => :delete %></li>

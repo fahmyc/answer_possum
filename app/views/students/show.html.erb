@@ -1,16 +1,23 @@
 <h1> <%= @students.name %>'s Work Desk </h1>
 My email: <%= @students.email %>
+<div class = "row2">
+  <div class="span3">
   <p>
     Courses I'm taking:
+    <ol>
       <% @students.courses.each do |course| %>
         <%# tutors_in_course = Tutor.find(:all, :conditions => ['courses'], course) %>
         <li> <%= course %> <!--(tutors_in_course.count tutors)--> </li>
       <% end %>
-
+    </ol>
   </p>
-  
+  </div>
+  <div class = "span9">
+    <div class = "box1">
+  <h3><center>Ask a question!</center></h3>
 	<%= render 'shared/question_form' %>
-
+</div>
+</div>
   <!--
  	<% if @students.questions.any? %>
       <h3>Questions (<%= @students.questions.count %>)</h3>
@@ -22,4 +29,5 @@ My email: <%= @students.email %>
     	<p> NO QUESTIONS YET </p>
     <% end %>
   -->
+</div>
 

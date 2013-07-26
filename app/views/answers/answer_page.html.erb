@@ -5,11 +5,12 @@
 <% else %>
 
 <table id = "inbox_question_list", class="display">
-	<thead>
+<thead>
 		<tr>
 			<th>Subject</th>
 			<th>Your Answer</th>
 			<th>Date Answered</th>
+			<th>New Comments?</th>
 			<th>Number of Comments</th>
 		</tr>
 	</thead>
@@ -23,6 +24,18 @@
 		<td><%= link_to question.subject, specific_answer_path(answer.id, current_tutor, qid) %> </td>
 		<td><%= truncate(answer.content) %> </td>
 		<td><%= answer.created_at %> </td>
+		<td>
+			<% counter = 0 %>
+			<% for comment in comments %>
+				<% if (!comment.read? || comment.read.nil?) && comment.student_sent? %>
+					<% counter = counter + 1 %>
+				<% end %>
+			<% end %>
+			<% if counter.to_f > 0 %>
+				<center><span class="badge badge-important">Unread Comments</span></center>
+			<% end %>
+		</td>
+
 		<td><%= comments.count %></td>
 	</tr>
 <% end %>

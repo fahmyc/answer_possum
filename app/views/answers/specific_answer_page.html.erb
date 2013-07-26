@@ -1,10 +1,22 @@
-<h4> Question Subject: <%= @question.subject %> </h4>
+<%# unread_comments = Comment.find(:all, :conditions =>{:answer_id => params[:id], :read => ['f', nil] }) %>
+<%# for comment in unread_comments %>
+	<%# comment.update_attributes(read: true) %>
+<%# end %>
 
-<h1> Question: <%= @question.content %> </h1>
+<h2> Question Subject: <%= @question.subject %> </h4>
 
-<h2> Your Answer: <%= @answer.content %> </h2>
+<h1> Q: <%= @question.content %> </h1>
+
+<h2> A: <%= @answer.content %> </h2>
+
+<p> <%= link_to "Back to answer page", tutors_answers_path(@question.courses, current_tutor) %>
 
 <h3> Comments: </h3>
+
+<% if @read_student_comments.any? %>
+<%= button_to "Mark Comments as Unread",tutor_side_make_comment_unread_path(params[:id], params[:question_id]) %>
+<% end %>
+
 <% for c in @comments %>
 	<% if @comments.any? %>
 

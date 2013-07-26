@@ -1,10 +1,19 @@
 <h1> <%= @students.name %>'s INBOX </h1>
-
+<% if @open_questions.any? %>
+	<h2>
+		<%= button_to "Close all questions",close_all_questions_button_path, :confirm => "Are you sure you want to close all questions? By doing this no questions will be visible to tutors.", class: "btn btn-warning" %>
+	</h2>
+<% else %>
+	<p>
+		All questions are currently closed but you can still rate the ones that are still unrated.
+	</p>
+<% end %>
 <table id = "inbox_question_list", class="display">
 	<thead>
 		<tr>
 			<th>Subject</th>
 			<th>Open or closed?</th>
+			<th>Comments?</th>
 			<th>Rated?</th>
 			<th>Course</th>
 			<th>Date asked</th>
@@ -39,6 +48,20 @@
 					<% end %>
 			<% else %>
 				Closed
+			<% end %>
+		</td>
+		<td>
+			<% answers = Answer.find(:all,  :conditions => {:question_id => question.id})%>
+			<% answer_ids = answers.collect(&:id) %>
+			<% comments = Comment.find(:all, :conditions => {:answer_id => answer_ids}) %>
+			<% counter1 = 0 %>
+			<% for comment in comments %>
+				<% if (!comment.read? || comment.read.nil?) && !comment.student_sent? %>
+					<% counter1 = counter1 + 1 %>
+				<% end %>
+			<% end %>
+			<% if counter1.to_f > 0 %>
+				<center><span class="badge badge-important">Unread Comments</span></center>
 			<% end %>
 		</td>
 		<td>

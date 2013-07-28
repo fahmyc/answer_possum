@@ -1,0 +1,30 @@
+<h3><strong>Question Subject:</strong> <%= @question.subject %></h3>
+<h3><strong>Question Content:</strong> <%= @question.content %></h3>
+<%= link_to "Back to the #{@question.courses} question page", questions_courses_path(@question.courses) %>
+
+<% tutor_answer = Answer.find(:all, :conditions => {question_id: @question.id, tutor_id: current_tutor.id}) %>
+<% ta = tutor_answer.first %>
+
+<% duplicate_answer = Answer.find(:all, :conditions => {question_id: @question.id, tutor_id: current_tutor.id}) %>
+<% dup = duplicate_answer.collect(&:content) %>
+<% if duplicate_answer.empty? %>
+
+<p><%= simple_form_for(@answer) do |f| %>
+	  <%= render 'shared/error_messages', object: f.object %>
+
+		<%= f.input :content, as: :text, input_html: {style: 'height:100px; width:500px;'} %>
+		<%= f.input :question_id, as: :hidden, :input_html => { :value => @question.id } %>
+		<%= f.button :submit, "Answer Question" %>
+
+		
+	<% end %>
+</p>
+<% else %>
+	<p><br> </br>
+		<strong>Your Answer:</strong> <%= ta.content %>
+		<br>
+		<%= link_to "Go to this answers comment page", specific_answer_path(ta.id, current_tutor, @question.id) %>
+	</p>
+<% end %>
+</div>
+</div>

@@ -104,6 +104,7 @@
 						<%= f.input :answer_id, as: :hidden, :input_html => { :value => answerid} %>
 						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid} %>
 						<%= f.input :student_sent, as: :hidden, :input_html => { :value => 1} %>
+						<%= f.input :read, as: :hidden, :input_html => { :value => 0} %>
 						<%= f.button :submit, "Send comment" %>
 					<% end %>	
 				</p>

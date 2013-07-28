@@ -27,6 +27,10 @@ class StudentsController < ApplicationController
 
 		redirect_to students_inbox_path(current_student)
 	end
+
+	def sign_up
+		@courses = ["Math", "Science", "English"]
+	end
 	
 	  private
 

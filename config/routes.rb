@@ -45,7 +45,10 @@ AnswerPossum::Application.routes.draw do
   match 'tutors/profile/:tutor_id',    to: 'tutors#tutor_profile',  :as => "tutors_profile", :via => "get"
   match 'answers/:courses/:tutor_id',   to: 'answers#answer_page',    :as => "tutors_answers", :via =>"get"
   match 'answers/:id/:tutor_id/:question_id',     to: 'answers#specific_answer_page', :as => "specific_answer"
-  
+  match 'questions_s/:id/', to: 'questions#specific_question', :as => "specific_question"
+
+
+
 ##buttons
 #button to close all questions
   match '/students/:id/close_all' => 'students#close_all', :as => 'close_all_questions_button'

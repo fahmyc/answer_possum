@@ -23,6 +23,11 @@ class QuestionsController < ApplicationController
   def destroy
   end
 
+  def specific_question
+    @question = Question.find(params[:id])
+    @answer = current_tutor.answers.build if tutor_signed_in?
+  end
+
   def qna
     @question = Question.find_by_id(params[:id])
     @answers_to_question = Answer.find(:all, :conditions => ['question_id = ?', params[:id]] )
@@ -30,7 +35,7 @@ class QuestionsController < ApplicationController
 
     @comment = current_student.comments.build if student_signed_in?
 
-    unread_comments = Comment.find(:all, :conditions =>{:answer_id => params[:id], :read => ['f', nil] })
+    unread_comments = Comment.find(:all, :conditions =>{:answer_id => params[:id], :student_sent => 'f', :read => ['f', nil] })
       for comment in unread_comments
         comment.update_attributes(read: true)
       end 

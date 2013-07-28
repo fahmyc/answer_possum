@@ -1,33 +1,72 @@
 <h1> Question Dashboard </h1>
 
 
+<table id = "inbox_question_list", class="display">
+<thead>
+		<tr>
+			<th>Question Subject</th>
+			<th>Date asked</th>
+			<th>Number of Answers</th>
+			<th>Your Answer</th>
+		</tr>
+	</thead>
 
-
+<tbody>
 <% for question in @questions %>
 <% answer_count = Answer.find(:all, :conditions =>['question_id=?', question.id]) %>
+<% tutor_answer = Answer.find(:all, :conditions => {question_id: question.id, tutor_id: current_tutor.id}) %>
+<% ta = tutor_answer.first %>
+<tr>
+	<td>
+		<%= link_to question.subject, specific_question_path(question.id) %>
+	</td>
+
+	<td>
+		<%= question.created_at %>
+	</td>
+
+	<td>
+		<%= pluralize(answer_count.count, "answer") %>
+	</td>
+
+	<td>
+
+		<% if tutor_answer.empty? %>
+			<center>Not answered</center>
+		<% else %>
+			<center><span class="badge badge-success"><i class="icon-ok icon-white"></i></span>  <%= link_to "See your answer", specific_answer_path(ta.id, current_tutor, question.id) %> </center>
+		<% end %>
+	</td>
+<% end %>
+</tr>
+</tbody>
+</table>
+
+	<!--
 	<div class = "accordion_menu">
-		<h3><%= question.subject %> (Answered <%= pluralize(answer_count.count, "time") %>) </h3>
+		<h3><%= question.subject %> (Answered <%#= pluralize(answer_count.count, "time") %>) </h3>
 		<div>
 			<p><%= question.content %></p>
-			<% duplicate_answer = Answer.find(:all, :conditions => {question_id: question.id, tutor_id: current_tutor.id}) %>
-			<% dup = duplicate_answer.collect(&:content) %>
-			<% if duplicate_answer.empty? %>
+			<%# duplicate_answer = Answer.find(:all, :conditions => {question_id: question.id, tutor_id: current_tutor.id}) %>
+			<%# dup = duplicate_answer.collect(&:content) %>
+			<%# if duplicate_answer.empty? %>
 
-			<p><%= simple_form_for(@answer) do |f| %>
-				  <%= render 'shared/error_messages', object: f.object %>
+			<p><%#= simple_form_for(@answer) do |f| %>
+				  <%#= render 'shared/error_messages', object: f.object %>
 
-					<%= f.input :content, as: :text, input_html: {style: 'height:100px; width:500px;'} %>
-					<%= f.input :question_id, as: :hidden, :input_html => { :value => question.id } %>
-					<%= f.button :submit, "Answer Question" %>
+					<%#= f.input :content, as: :text, input_html: {style: 'height:100px; width:500px;'} %>
+					<%#= f.input :question_id, as: :hidden, :input_html => { :value => question.id } %>
+					<%#= f.button :submit, "Answer Question" %>
 
 					
-				<% end %>
+				<%# end %>
 			</p>
-			<% else %>
+			<%# else %>
 				<p>
-					<strong>Your answer: <% dup.each do |dup| %> <%= dup %> <% end %></strong>
+					<strong>Your answer: <%# dup.each do |dup| %> <%= dup %> <%# end %></strong>
 				</p>
-			<% end %>
+			<%# end %>
 		</div>
 	</div>
-<% end %>
+<%# end %>
+-->

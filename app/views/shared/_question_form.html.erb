@@ -3,9 +3,8 @@
   	<div class="offset1">
 		<%= f.input :courses, collection: @courses, as: :radio %>
 		<%= f.input :subject, hint: "Short description of question" %>
-		<%= f.input :content, as: :text, placeholder: "Ask a new Question...", input_html: {style: 'height:100px; width:500px;'} %>
+		<%= f.input :content, as: :text, placeholder: "Ask a new Question...", input_html: {style: 'height:75px; width:500px;'}, :label => false %>
 		<%= f.input :open, as: :hidden, :input_html => { :value => true } %>
-	    <%#= f.text_area :content, placeholder: "Ask a new Question..." %>
 		<%= f.button :submit, "Ask Question", class: "btn btn-large btn-primary" %>
 	</div>
 <% end %>

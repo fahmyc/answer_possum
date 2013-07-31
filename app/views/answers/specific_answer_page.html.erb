@@ -23,12 +23,12 @@
 		<% if c.student_sent? %>
 			<p>
 				<br><strong>Student: </strong><%= c.content %></br>
-				<br><strong>Posted at:</strong> <%= c.created_at %></br>
+				<strong>Posted at:</strong> <%= c.created_at.strftime("%I:%M %p") %> on <%= c.created_at.strftime("%d %b. %Y") %>
 			</p>
 		<% else %>
 			<p>
 				<br><strong>You: </strong><%= c.content %></br>
-				<br><strong>Posted at:</strong> <%= c.created_at %></br>
+				<strong>Posted at:</strong> <%= c.created_at.strftime("%I:%M %p") %> on <%= c.created_at.strftime("%d %b. %Y") %>
 			</p>
 		<% end %>
 	<!--<%# else %>

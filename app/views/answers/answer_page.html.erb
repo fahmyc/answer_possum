@@ -23,7 +23,7 @@
 	<tr>
 		<td><%= link_to question.subject, specific_answer_path(answer.id, current_tutor, qid) %> </td>
 		<td><%= truncate(answer.content) %> </td>
-		<td><%= answer.created_at %> </td>
+		<td><%= answer.created_at.strftime("%I:%M %p") %> on <%= answer.created_at.strftime("%d %b. %Y") %> </td>
 		<td>
 			<% counter = 0 %>
 			<% for comment in comments %>

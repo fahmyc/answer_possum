@@ -1,0 +1,436 @@
+
+---
+answers:
+  columns:
+  - id
+  - content
+  - question_id
+  - tutor_id
+  - created_at
+  - updated_at
+  - rating
+  - student_id
+  - foq_helper
+  - read
+  records: 
+  - - 1
+    - I'm gonna try answering this.
+    - 1
+    - 2
+    - '2013-07-27 23:33:00.462823'
+    - '2013-07-27 23:36:21.663331'
+    - 2
+    - 3
+    - 
+    - false
+  - - 2
+    - Here's the answer!
+    - 5
+    - 2
+    - '2013-07-28 00:27:53.035147'
+    - '2013-07-28 00:27:53.035147'
+    - 
+    - 
+    - 
+    - false
+
+---
+comments:
+  columns:
+  - id
+  - answer_id
+  - tutor_id
+  - student_id
+  - content
+  - created_at
+  - updated_at
+  - student_sent
+  - read
+  records: 
+  - - 1
+    - 1
+    - 2
+    - 3
+    - Nice try!
+    - '2013-07-27 23:36:30.334827'
+    - '2013-07-27 23:38:24.205340'
+    - true
+    - true
+  - - 2
+    - 1
+    - 2
+    - 3
+    - second comment
+    - '2013-07-27 23:39:04.894667'
+    - '2013-07-27 23:39:04.946670'
+    - true
+    - true
+  - - 3
+    - 1
+    - 2
+    - 3
+    - This is my first comment, should be read = nil or false
+    - '2013-07-27 23:40:42.620257'
+    - '2013-07-27 23:41:53.898334'
+    - false
+    - true
+  - - 4
+    - 1
+    - 2
+    - 3
+    - This should also be false.
+    - '2013-07-27 23:42:07.250097'
+    - '2013-07-27 23:42:07.308101'
+    - true
+    - true
+  - - 5
+    - 1
+    - 2
+    - 3
+    - this should be false!
+    - '2013-07-27 23:42:57.569975'
+    - '2013-07-27 23:42:57.640979'
+    - true
+    - true
+  - - 6
+    - 1
+    - 2
+    - 3
+    - DEFINITELY FALSE
+    - '2013-07-27 23:44:20.542721'
+    - '2013-07-28 00:18:31.788046'
+    - true
+    - true
+
+---
+questions:
+  columns:
+  - id
+  - content
+  - student_id
+  - created_at
+  - updated_at
+  - courses
+  - subject
+  - open
+  records: 
+  - - 1
+    - This is a question for math 1a03, I dont get anything!
+    - 3
+    - '2013-07-27 23:31:39.397186'
+    - '2013-07-27 23:31:39.397186'
+    - MATH 1A03
+    - Math 1a03 q
+    - true
+  - - 2
+    - Eng!
+    - 3
+    - '2013-07-27 23:31:51.888901'
+    - '2013-07-27 23:31:51.888901'
+    - ENG 1C03
+    - eng 1c03
+    - true
+  - - 3
+    - ps2!!!!LOL
+    - 3
+    - '2013-07-27 23:32:05.736693'
+    - '2013-07-27 23:32:05.736693'
+    - COMM 1B03
+    - Com 1b03 ps 2
+    - true
+  - - 4
+    - more questionz!LOL z
+    - 3
+    - '2013-07-27 23:34:32.318077'
+    - '2013-07-27 23:34:32.318077'
+    - MATH 1A03
+    - more qz
+    - true
+  - - 5
+    - this is another question for math.
+    - 4
+    - '2013-07-27 23:35:18.428714'
+    - '2013-07-27 23:35:18.428714'
+    - MATH 1A03
+    - more math questions!
+    - true
+  - - 6
+    - enotherajklfa endGG!
+    - 4
+    - '2013-07-27 23:35:28.852310'
+    - '2013-07-27 23:35:28.852310'
+    - ENG 1C03
+    - another eng
+    - true
+
+---
+students:
+  columns:
+  - id
+  - email
+  - encrypted_password
+  - reset_password_token
+  - reset_password_sent_at
+  - remember_created_at
+  - sign_in_count
+  - current_sign_in_at
+  - last_sign_in_at
+  - current_sign_in_ip
+  - last_sign_in_ip
+  - created_at
+  - updated_at
+  - courses
+  - name
+  records: 
+  - - 1
+    - tc@tc.com
+    - $2a$10$QrlABapxr/QWLcRPOQW/iOKvvdTFVXzXdlt1k6ZQ6W8cXKqDUcoSG
+    - 
+    - 
+    - 
+    - 1
+    - '2013-07-27 22:52:58.355430'
+    - '2013-07-27 22:52:58.355430'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-27 22:52:58.291426'
+    - '2013-07-27 23:15:28.955680'
+    - ! '---
+
+      - 1C03
+
+      - 1E03
+
+      - 1B03
+
+      - 2BB3
+
+'
+    - Testing courses
+  - - 2
+    - c2@hot.com
+    - $2a$10$efNW1/7rhQBUiSfVPcY9TePt3wYsOHi/WhHa0.TPAd3Pycqp3P9dC
+    - 
+    - 
+    - 
+    - 1
+    - '2013-07-27 23:21:27.632195'
+    - '2013-07-27 23:21:27.632195'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-27 23:21:27.622195'
+    - '2013-07-27 23:27:41.401574'
+    - ! '---
+
+      - MATH 1A03
+
+      - COMM 1E03
+
+      - COMM 2BC3
+
+      - CIVENG 2B04
+
+      - CIVENG 2C04
+
+      - CIVENG 2E03
+
+      - ECON 1BB3
+
+'
+    - Chris Fahmy
+  - - 3
+    - chrisfahmy@hotmail.com
+    - $2a$10$/PSSt0JUJ4HUGKh3WbhFLeS5HK2pe2ZJDq4Rll/2cbWhRDjFHnGTG
+    - 
+    - 
+    - 
+    - 9
+    - '2013-07-29 20:03:11.561956'
+    - '2013-07-29 16:33:11.113689'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-27 23:28:31.842459'
+    - '2013-07-29 20:03:11.571956'
+    - ! '---
+
+      - MATH 1A03
+
+      - COMM 1B03
+
+      - ECON 1B03
+
+      - ECON 2GG3
+
+      - BIOCHEM 2B03
+
+      - CHEM 4G09
+
+'
+    - Chris Fahmy
+  - - 4
+    - mf@mf.com
+    - $2a$10$BN5zAxRIsyYH2/wI3MWcE.W3JIG8qp.cUsmVO./kd2hI0XW7p1bB6
+    - 
+    - 
+    - 
+    - 1
+    - '2013-07-27 23:35:02.322793'
+    - '2013-07-27 23:35:02.322793'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-27 23:35:02.311792'
+    - '2013-07-27 23:35:41.945059'
+    - ! '---
+
+      - MATH 1A03
+
+      - ENG 1C03
+
+      - COMM 1B03
+
+      - STAT 1L03
+
+      - ECON 1B03
+
+      - BIOCHEM 2B03
+
+'
+    - Monica Fahmy
+  - - 5
+    - fdsa@fdsa.com
+    - $2a$10$VuWDOMQJxk2sMvGmqCqmN.NRWB/VTY33pCMw.0VNt7t4pycgl4F72
+    - 
+    - 
+    - 
+    - 1
+    - '2013-07-29 15:08:30.835114'
+    - '2013-07-29 15:08:30.835114'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-29 15:08:30.783111'
+    - '2013-07-29 15:10:37.422354'
+    - ! '---
+
+      - MATH 1A03
+
+      - ENG 1D04
+
+      - COMM 1B03
+
+      - CHEMENG 2D04
+
+'
+    - Chris 73
+  - - 6
+    - fdsafds@fdsak.com
+    - $2a$10$kDWW2N3D73Gk85HhD0EG1.sJ4f86b7yx/g9SU05zKOixMEfWmh03u
+    - 
+    - 
+    - 
+    - 1
+    - '2013-07-29 15:21:39.550226'
+    - '2013-07-29 15:21:39.550226'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-29 15:21:39.537225'
+    - '2013-07-29 15:21:47.989708'
+    - ! '---
+
+      - MATH 1A03
+
+      - MATH 1AA3
+
+'
+    - chrif
+
+---
+tutors:
+  columns:
+  - id
+  - email
+  - encrypted_password
+  - reset_password_token
+  - reset_password_sent_at
+  - remember_created_at
+  - sign_in_count
+  - current_sign_in_at
+  - last_sign_in_at
+  - current_sign_in_ip
+  - last_sign_in_ip
+  - created_at
+  - updated_at
+  - courses
+  - name
+  - rating
+  - number_of_ratings
+  - number_of_positive_ratings
+  - rating_percentage
+  records: 
+  - - 2
+    - ms@ms.com
+    - $2a$10$ws1LrFiv2o3YS7OuTy34jusfFT4aU3Dty5VLISBRH0JylDo05FGXq
+    - 
+    - 
+    - 
+    - 4
+    - '2013-07-27 23:48:06.603651'
+    - '2013-07-27 23:39:21.420612'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-27 23:32:41.506739'
+    - '2013-07-29 14:17:20.754515'
+    - ! '---
+
+      - MATH 1A03
+
+      - ENG 1C03
+
+      - COMM 1B03
+
+      - STAT 1L03
+
+      - ECON 1B03
+
+      - BIOCHEM 2B03
+
+'
+    - Mervat Saad
+    - 2
+    - 1
+    - 1
+    - 1
+  - - 3
+    - chrisfahmy@hotmail.com
+    - $2a$10$fW4q5LC3N0ZVJgZaNXtm7O2w5qEuzF.3ys.KBh3TX8B2kPaFfmvLy
+    - 
+    - 
+    - 
+    - 1
+    - '2013-07-29 15:39:55.500910'
+    - '2013-07-29 15:39:55.500910'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2013-07-29 15:39:55.488910'
+    - '2013-07-29 16:32:43.724122'
+    - ! '---
+
+      - MATH 1A03
+
+      - MATH 1LT3
+
+      - ENGINEER 3N03
+
+      - STAT 3F03
+
+      - ECON 3B03
+
+      - CHEMENG 4X03
+
+      - CIVENG 3B03
+
+'
+    - Chris Fahmy
+    - 0
+    - 
+    - 
+    - 

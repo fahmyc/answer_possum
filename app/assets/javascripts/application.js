@@ -20,4 +20,7 @@ $(document).ready(function(){
 });	
 
 
-
+$(document).ready(function(){
+	$('#unrated').tooltip('show');
+	
+});	

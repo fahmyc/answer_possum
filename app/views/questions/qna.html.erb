@@ -33,7 +33,7 @@
 	<% end %>
 
 	<div class = "accordion_menu">
-		<h3><%= tutor.name %> &nbsp &nbsp &nbsp &nbsp answered question on <%= answer.created_at %>. &nbsp &nbsp &nbsp &nbsp  
+		<h3><%= tutor.name %> &nbsp &nbsp &nbsp &nbsp answered question at <%= answer.created_at.strftime("%I:%M %p") %> on <%= answer.created_at.strftime("%d %b. %Y") %>. &nbsp &nbsp &nbsp &nbsp  
 			<% if answer.rating == nil %>
 				<span class="badge badge-warning">Unrated</span>
 			<% end %>
@@ -42,14 +42,15 @@
 				<% end %>
 </h3>
 		<div>
-			<p><%= answer.content %></p>
+			<p>A: <%= answer.content %></p>
+			<br>
 
 			<p>
 				<% if answer.rating == nil %>
 					<%= simple_form_for(answer) do |f| %>
 					<%#= simple_form_for(@rating) do |f| %>
 	  				<%= render 'shared/error_messages', object: f.object %>
-						<%= f.input :rating, collection: @ratings, as: :radio %>
+						<%= f.input :rating, collection: @ratings, as: :radio, :item_wrapper_class => 'inline' %>
 						<%= f.input :student_id, as: :hidden, :input_html => { :value => params[:student_id] } %>
 						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid } %>
 						<%= f.input :answer_id, as: :hidden, :input_html => { :value => answerid } %>
@@ -60,36 +61,44 @@
 					<p> Thanks for rating this answer! </p>
 				<% end %>
 			
-			<%= link_to "Book #{tutor.name} now!", bookings_booking_path(current_student, tutorid) %>		
+			<%= link_to(raw("<strong>Book #{tutor.name} now!</strong>"), bookings_booking_path(current_student, tutorid)) %>		
 
+			<div class = "row3">
 				<p>
 					<% comments = Comment.find(:all, :conditions => ['answer_id =?', answerid]) %>
 					<br>
-					
-					<% if comments.any? %>
-						<strong>Comments:</strong>
-					<% end %>
 
-					<% unread_comments = Comment.find(:all, :conditions => {:answer_id => answerid, :read => ['f', nil], :student_sent => 'f' }) %>
-					<% if unread_comments.any? %>
-				 <%= button_to "Mark Comments as Read",make_comments_read_path(answerid, tutorid) %>
-					<% end %>
+					<div class="span3">
+						<% if comments.any? %>
+							<strong>Comments:</strong>
+						<% end %>
+					</div>
 
-					<% read_comments = Comment.find(:all, :conditions => {:answer_id => answerid, :read => 't', :student_sent => 'f' }) %>
-					<% if read_comments.any? %>
-						<%= button_to "Mark Comments as Unread",student_side_make_comment_unread_path(answerid, params[:id]) %>
-					<% end %>
+					<div class="span4">
+						<center>
+						<% unread_comments = Comment.find(:all, :conditions => {:answer_id => answerid, :read => ['f', nil], :student_sent => 'f' }) %>
+						<% if unread_comments.any? %>
+					 		<%= button_to "Mark Comments as Read",make_comments_read_path(answerid, tutorid), class: "btn btn-warning" %>
+						<% end %>
 
+						<% read_comments = Comment.find(:all, :conditions => {:answer_id => answerid, :read => 't', :student_sent => 'f' }) %>
+						<% if read_comments.any? %>
+							<%= button_to "Mark Comments as Unread",student_side_make_comment_unread_path(answerid, params[:id]), class: "btn btn-warning" %>
+						<% end %>
+					</center>
+					</div>
+			</div>
+			<div class = "span12">
 					<% for c in comments %>
 						<% if c.student_sent? %>
 							<p>
 								<br><strong>You: </strong><%= c.content %></br>
-								<br><strong>Posted at:</strong> <%= c.created_at %></br>
+								<strong>Posted at:</strong> <%= c.created_at.strftime("%I:%M %p") %> on <%= c.created_at.strftime("%d %b. %Y") %>
 							</p>
 						<% else %>
 							<p>
 								<br><strong><%= link_to "#{tutor.name}", bookings_booking_path(current_student, tutorid) %>:</strong> <%= c.content %></br>
-								<br><strong>Posted at: </strong><%= c.created_at %></br>
+								<strong>Posted at: </strong><%= c.created_at.strftime("%I:%M %p") %> on <%= c.created_at.strftime("%d %b. %Y") %>
 							</p>
 						<% end %>
 					<% end %>
@@ -97,10 +106,10 @@
 				</p>
 
 
-			<p> 
+			<p> <br>
 					<%# @comment = current_student.comments.build if student_signed_in? %>
 					<%= simple_form_for(@comment) do |f| %>
-						<%= f.input :content, as: :text, placeholder: "Follow up question or comment?", input_html: {style: 'height:100px; width:500px;'} %>
+						<%= f.input :content, as: :text, placeholder: "Follow up question or comment?", input_html: {style: 'height:100px; width:500px;'}, label: false %>
 						<%= f.input :answer_id, as: :hidden, :input_html => { :value => answerid} %>
 						<%= f.input :tutor_id, as: :hidden, :input_html => { :value => tutorid} %>
 						<%= f.input :student_sent, as: :hidden, :input_html => { :value => 1} %>
@@ -111,6 +120,7 @@
 				
 
 			</p>
+		</div>
 		</div>
 	</div>
 <% end %>

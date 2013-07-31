@@ -6,9 +6,34 @@ html {
 }
 
 body {  
-padding-top: 40px;  
+padding-top: 47px;  
 padding-bottom: 40px; 
  
+}
+
+div{
+  
+}
+
+#unrated{
+  height:10px;
+  width:10px;
+    -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px; 
+  background-color:#FF0000;
+  display: inline-block;
+
+}
+
+#unread_comments{
+  height:10px;
+  width:10px;
+      -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px; 
+  background-color:#E2BE22;
+  display: inline-block; 
 }
 
 .btn btn-warning{
@@ -75,12 +100,24 @@ padding-bottom: 40px;
 }
 
 .row2{
-      padding-top: -50px;  
+      padding-top: 10px;  
       padding-bottom: 450px;
 }
 
+.row3{
+      padding-top: 0px;  
+      padding-bottom: 1px; 
+}
+
 .box1{
-    margin-left:auto;
+  margin-left:auto;
+  margin-right:auto;
+  border:2px solid black;   
+  position:relative;
+}
+
+.box1{
+  margin-left:auto;
   margin-right:auto;
   border:2px solid black;   
   position:relative;

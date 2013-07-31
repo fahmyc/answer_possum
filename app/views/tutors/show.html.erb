@@ -8,6 +8,9 @@
 	<h2>Average: <%= number_to_percentage(@tutors.rating_percentage.to_f * 100, precision: 0) %></h2>
 	<!-- This rating percentage is also used in the tutors index -->
 <% end %>
+
+	<h2>Total number of answers: <%= @total_answers.count %></h2>
+
 <div class = "row1">
 	<div class="span1"><br></br></div>
 	<div class="span3">

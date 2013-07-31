@@ -22,7 +22,7 @@
 	</td>
 
 	<td>
-		<%= question.created_at %>
+		<%= question.created_at.strftime("%I:%M %p") %> on <%= question.created_at.strftime("%d %b. %Y") %>
 	</td>
 
 	<td>

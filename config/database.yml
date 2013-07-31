@@ -18,8 +18,56 @@ test:
   pool: 5
   timeout: 5000
 
+#production:
+ # adapter: sqlite3
+  #database: db/production.sqlite3
+  #pool: 5
+  #timeout: 5000
+
+
+
+
+
+
+
+
+
+#development:
+ # adapter: mysql
+  #encoding: utf8
+  #reconnect: false
+  #database: answer_possum_development
+  #pool: 5
+  #username: deploy
+  #password: 
+  #host: localhost
+  #port: 3306
+  #socket: /tmp/mysql.sock 
+  #**socket: /opt/local/var/run/mysql5/mysqld.sock**
+
+#test:
+ # adapter: mysql
+  #encoding: utf8
+  #reconnect: false
+  #database: answer_possum_test
+  #pool: 5
+  #username: deploy
+  #password: 
+  #host: localhost
+  #port: 3306
+  #socket: /tmp/mysql.sock 
+  #socket: **/opt/local/var/run/mysql5/mysqld.sock**
+
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: answerpossum
   pool: 5
-  timeout: 5000
+  username: answerpossum
+  password: 4iLHA2YeTvYQOewK
+  host: 127.0.0.1
+  #host: 72.51.29.183
+  port: 3306
+  #socket: /tmp/mysql.sock 
+ # socket: **/opt/local/var/run/mysql5/mysqld.sock**

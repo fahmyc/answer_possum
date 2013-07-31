@@ -16,6 +16,7 @@ class TutorsController < ApplicationController
       @level = "Rookie"
     end
 
+    @total_answers = Answer.find(:all, :conditions => ['tutor_id =?', params[:id]])
 
 	end
 

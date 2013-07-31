@@ -42,11 +42,19 @@
             <li><%= link_to 'Student Home', student_path(current_student) %></li>
 
             <% if counter.to_f > 0 && counter1.to_f < 1 %>
-              <li><%= link_to 'Your Inbox UNRATED ANSWERS', students_inbox_path(current_student) %></li>
+
+              <li><%= link_to(raw('Your Inbox <div id="unrated"></div>'), students_inbox_path(current_student), title: 'Unrated Answers', rel: 'tooltip') %> </li>
+
+
             <% elsif counter.to_f > 0 && counter1.to_f > 0 %>
-              <li><%= link_to 'Your Inbox UR AND UC', students_inbox_path(current_student) %></li>
+
+              <li><%= link_to(raw('Your Inbox <div id="unrated"></div> <div id="unread_comments"></div>'), students_inbox_path(current_student), title: 'Unrated Answers and Unread Comments', rel: 'tooltip') %> </li>
+
+
             <% elsif counter.to_f < 1 && counter1.to_f > 0 %>
-              <li><%= link_to 'Your Inbox UNREAD COMMENTS', students_inbox_path(current_student) %></li>
+
+              <li><%= link_to(raw('Your Inbox <div id="unread_comments"></div>'), students_inbox_path(current_student), title: 'Unread Comments', rel: 'tooltip') %></li>
+
             <% else %>
               <li><%= link_to 'Your Inbox', students_inbox_path(current_student) %></li>
             <% end %>

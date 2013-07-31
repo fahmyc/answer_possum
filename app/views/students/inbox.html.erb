@@ -73,7 +73,7 @@
 			<% end %>
 		</td>
 		<td><%= question.courses %> </td>
-		<td><%= question.created_at %> </td>
+		<td><%= question.created_at.strftime("%I:%M %p") %> on <%= question.created_at.strftime("%d %b. %Y") %></td>
 		<td><%= answers.count %> </td>
 	</tr>
 <% end %>

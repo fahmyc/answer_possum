@@ -9,6 +9,7 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
+    <%= f.input :about_me, placeholder: "Write something about yourself...", input_html: {style: 'height:100px; width:275px;'} %>
   </br>
     <%= f.button :submit, "Sign up!", class: "btn btn-large btn-primary", style:"height:100px; width:250px; font-size: 40px" %>
   </div>
@@ -102,7 +103,7 @@
 </div>
 
     <div class="span5">
-      <p>For information about the courses please click <a href="http://registrar.mcmaster.ca/CALENDAR/current/pg4.html">here</a>.</p>
+      <p>For information about the courses please click <a href="http://registrar.mcmaster.ca/CALENDAR/current/pg4.html" target="_blank">here</a>.</p>
     </div>
 
 </div>

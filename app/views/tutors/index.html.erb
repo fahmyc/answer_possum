@@ -15,10 +15,12 @@
 <tbody>
 <% @tutors.each do |tutor| %>
 	<tr>
-		<td><%= link_to tutor.name.capitalize, tutors_profile_path(tutor) %> </td>
-		<td><% tutor.courses.each do |course| %> 
+		<td><%= link_to tutor.name, tutors_profile_path(tutor) %> </td>
+		<td><ul>
+			<% tutor.courses.each do |course| %> 
 			<li><%= course %></li>
 			<% end %>
+		</ul>
 		</td>
 		<td> 	<% if tutor.rating == nil %>
   					(No ratings yet)

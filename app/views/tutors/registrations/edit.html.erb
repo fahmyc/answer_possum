@@ -7,14 +7,17 @@
   <div class="span6">
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :name %>
+    <%= f.input :about_me, placeholder: "Write something about yourself...", input_html: {style: 'height:100px; width:275px;'} %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
-    <%= f.input :password_confirmation, :required => false %>
-    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
+    <%= f.input :password, :autocomplete => "off", :label =>(raw('New Password <div id="small_text"> (Leave blank for no change)</div>')), :required => false %>
+
+    <%= f.input :password_confirmation, :required => false, :label => "New password Confirmation" %>
+    <%= f.input :current_password, :required => true %>
+    <div id="small_text">We need your current password to confirm changes.</div>
 </br>
     <%= f.button :submit, "Update!", class: "btn btn-large btn-primary", style:"height:100px; width:250px; font-size: 40px" %>
   </div>
@@ -129,7 +132,7 @@
 </div>
 -->
     <div class="span5">
-      <p>For information about the courses please click <a href="http://registrar.mcmaster.ca/CALENDAR/current/pg4.html">here</a>.</p>
+      <p>For information about the courses please click <a href="http://registrar.mcmaster.ca/CALENDAR/current/pg4.html" target="_blank">here</a>.</p>
     </div>
 
 </div>

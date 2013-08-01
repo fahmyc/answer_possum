@@ -66,6 +66,7 @@
           <% elsif tutor_signed_in?%>
             <ul class = "nav pull-left">
             <li><%= link_to 'Tutor Home', tutor_path(current_tutor) %></li>
+            <li><%= link_to 'Your Profile', tutors_profile_path(current_tutor) %></li>
             </ul>
             <!--
             <li id="fat-menu" class="dropdown">

@@ -1,14 +1,47 @@
-<h1> PROFILE PAGE </h1>
+<h1> <%= @tutor.name %>'s Profile </h1>
+	<div class="row_tutor_profile">
+<div class="span4">
+	<h3><u>Name:</u> <br><%= @tutor.name %></h3>
+	<% if student_signed_in? %> 
+	<h3><%= link_to "BOOK #{@tutor.name}!", bookings_booking_path(current_student, @tutor.id) %></h3>
+	<% end %>
+</div>
 
-<ul>
-<li> <%= link_to "BOOK ME!", bookings_booking_path(current_student, @tutor.id) %> </li>
+<div class="span1">
+	<br>
+</div>
 
-<li>Name: <%= @tutor.name %>
-<li>Courses: 	<% @tutor.courses.each do |course| %> 
-				<li><%= course %></li>
-			<% end %></li>
-<li>Credentials: HAVENT PUT YET! </li>
-<li>Rating: <%= @tutor.rating %></li>
-<li>Level: <%= @level %>
-<li>About me: HAVENT PUT INTO EDIT PROFILE YET!</li>
-</ul>
+<div class="span2">
+<h3>Courses:</h3>
+	<ul1>
+	<% @tutor.courses.each do |course| %> 
+		<li><%= course %></li>
+	<% end %>
+</ul1>
+</div>
+
+<div class="span1">
+	<br>
+</div>
+
+<div class="span3">
+<h3>About me:</h3>
+<% if !@tutor.about_me.nil? %>
+<p><%=@tutor.about_me %></p>
+<% else %>
+<p>(<%= @tutor.name %> hasn't filled in the about me section yet)</p>
+<% end %>
+</div>
+
+<div class="span1">
+	<br>
+</div>
+
+<div class="span3">
+<h3>Ratings:</h3>
+<p><strong>Level:</strong> <%= @level %></p>
+<p><strong>Average:</strong> <%= number_to_percentage(@tutor.rating_percentage.to_f * 100, precision: 0) %></p>
+</div>
+
+</div>
+</div>

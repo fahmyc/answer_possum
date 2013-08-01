@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724174554) do
+ActiveRecord::Schema.define(:version => 20130801170431) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20130724174554) do
     t.integer  "number_of_ratings"
     t.integer  "number_of_positive_ratings"
     t.decimal  "rating_percentage",          :precision => 5, :scale => 2
+    t.text     "about_me"
   end
 
   add_index "tutors", ["email"], :name => "index_tutors_on_email", :unique => true

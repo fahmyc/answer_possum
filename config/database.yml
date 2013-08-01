@@ -66,8 +66,9 @@ production:
   pool: 5
   username: answerpossum
   password: 4iLHA2YeTvYQOewK
-  host: 127.0.0.1
+  #host: 127.0.0.1
   #host: 72.51.29.183
-  port: 3306
+  #port: 3306
+  socket: /data/mysql/mysql.sock
   #socket: /tmp/mysql.sock 
  # socket: **/opt/local/var/run/mysql5/mysqld.sock**

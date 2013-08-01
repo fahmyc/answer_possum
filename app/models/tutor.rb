@@ -7,7 +7,7 @@ class Tutor < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :rating, :email, :password, :password_confirmation, :remember_me, :courses, :name, :number_of_ratings, :number_of_positive_ratings, :rating_percentage
+  attr_accessible :rating, :email, :password, :password_confirmation, :remember_me, :courses, :name, :number_of_ratings, :number_of_positive_ratings, :rating_percentage, :about_me
   # attr_accessible :title, :body
 
   serialize :courses
